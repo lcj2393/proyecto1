@@ -15,6 +15,8 @@ void most_LIFO(Nodo *&);//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
 void quit_LIFO(Nodo *&, int &);//FUNCION PARA LIMPIAR PILA
 bool vacia_LIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA VACIA
 void elim_LIFO();//FUNCION PARA VACIAR LA PILA EN NULL
+//void busc_LIFO(Nodo *&, int, int);
+int tama_LIFO(Nodo *&);
 
 void iniciar_FIFO();
 void ins_FIFO(Nodo *&inicio, Nodo *&fin, int num);
@@ -25,6 +27,10 @@ void elim_FIFO();
 
 int main(){
     menu();
+
+    system("cls");
+    printf("\n\n\n\t\t\tHAS SALIDO DEL PROGRAMA, VUELVA PRONTO!!!\n\n\n\n");
+    system("Pause");
     return 0;
 }
 
@@ -34,7 +40,8 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
     Nodo * fin = NULL;
 
     char opc_mp;
-    int opc_sm;
+    int n,opc_sm,dbusc;
+    bool vald=false;
     do{
         system("cls");
         printf("\n\t\t MENU PROYECTO 1 - EDII \n\n");
@@ -71,7 +78,6 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     printf("\nPila creada e iniciada exitosamente!\n");
                     break;
                 case 2:
-                    int n;
                     printf("\n\t\t INSERTAR ELEMENTOS LIFO\n");
                     printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
                     while(n!=0){
@@ -87,25 +93,60 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     scanf("%d", &opc_sm);
                     switch(opc_sm){
                     case 1:
-                        int n;
                         n=pila->dato;
                         printf("\n El primer elemento es %d \n",n);
                         break;
                     case 2:
-                        n=pila->Siguiente->dato;
+
                         printf("\n El ultimo elemento es %d \n",n);
                         break;
                     case 3:
                         printf("\nMOSTRAR TODOS LOS ELEMENTOS \n\n");
                         printf("\nLa lista LIFO contiene los siguientes elementos: \n\n");
+                        //n=tama_LIFO(pila);
                         most_LIFO(pila);
+                        printf("\n\n<<%d>>",n);
                         break;
                     default: printf("\n Ingreso una opcion invalida!!! \n\n");
                     }
                     break;
                 case 4:
+                    printf("\nBUSCAR ELEMENTOS\n\n");
+                    printf("Digite valor a buscar en la pila: ");
+                    scanf("%d",&dbusc);
+
+                    while(pila!=NULL){
+                    n=pila->dato;
+                    if(n==dbusc){
+                        printf("\nEl valor buscado <%d>, se encuentra en la lista LIFO\n",dbusc);
+                        vald=true;
+                        pila=pila->Siguiente;
+                        }else{
+                            pila=pila->Siguiente;
+                        }
+                    }
+                    if(vald!=true){
+                        printf("\nEl valor buscado <%d>, no se encuentra en la lista LIFO\n",dbusc);
+                    }
                     break;
                 case 5:
+                    printf("\ELIMINAR ELEMENTOS\n\n");
+                    printf("Digite valor a eliminar de la pila: ");
+                    scanf("%d",&dbusc);
+                    while(pila!=NULL){
+                    n=pila->dato;
+                    if(n==dbusc){
+                        quit_LIFO(pila,dbusc);
+                        pila=pila->Siguiente;
+                        printf("\nEl valor buscado <%d>, fue eliminado de la lista LIFO\n",dbusc);
+                        vald=true;
+                        }else{
+                            pila=pila->Siguiente;
+                        }
+                    }
+                    if(vald!=true){
+                        printf("\nEl valor buscado <%d>, no se encuentra en la lista LIFO\n",dbusc);
+                    }
                     break;
                 case 6:
                     break;
@@ -515,7 +556,9 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                             break;
                         case 3:
                             break;
-                        default: printf("\n Ingreso una opcion invalida!!! \n\n");
+                        default:
+                            printf("\n Ingreso una opcion invalida!!! \n\n");
+                        break;
                         }
                         break;
                     case 4:
@@ -539,6 +582,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                 break;
 
             case 'g':
+                system("cls");
                 printf("\t\t\n MENU OPERACIONES ANEXAS \n\n");
                 printf("\n a. CONCATENAR DOS LISTAS ");
                 printf("\n b. SUMAR DOS LISTAS ");
@@ -546,11 +590,13 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                 printf("\n d. ELEVAR UNA LISTA A LA POTENCIA DE OTRA ");
                 printf("\n e. COPIAR UNA LISTA EN OTRA ");
                 printf("\n f. PROBLEMA DE JOSEPHUS ");
+                printf("\n v. VOLVER AL MENU PRINCIPAL ");
                 printf("\n Ingrese una opcion (En Minusculas): ");
-                scanf("%s", opc_mp);
+                scanf("%s", &opc_mp);
 
                 switch(opc_mp){
                 case 'a':
+                    printf("aaaaaaaaaaaaaaaaaa");
                     break;
                 case 'b':
                     break;
@@ -561,6 +607,13 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                 case 'e':
                     break;
                 case 'f':
+                    break;
+                case 'v':
+                    system("cls");
+                    menu();
+                    break;
+                default:
+                    printf("\n Ingreso una opcion invalida!!! \n\n");
                     break;
                 }
 
@@ -586,11 +639,9 @@ void ins_LIFO(Nodo *&pila, int n){//FUNCION INSERTAR ELEMENTOS EN PILA
     pila= nuevo_nodo;
 }
 void most_LIFO(Nodo *&pila){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
-    Nodo * aux=NULL;
-    //aux=*Nodo;
-    while(aux!=NULL){
-        printf("%d",aux->dato);
-        aux=aux->Siguiente;
+    while(pila!=NULL){
+        printf("%d",pila->dato);
+        pila=pila->Siguiente;
     }
 }
 void quit_LIFO(Nodo *&pila, int &n){//FUNCION PARA LIMPIAR PILA
@@ -604,6 +655,14 @@ bool vacia_LIFO(Nodo *&pila){//FUNCION PARA VALIDAR SI LA PILA ESTA VACIA
 }
 void elim_LIFO(){//FUNCION PARA VACIAR LA PILA EN NULL
     Nodo * pila = NULL;
+}
+
+int tama_LIFO(Nodo *&pila){
+    int tama=0;
+    while(pila!=NULL){
+        tama++;
+    }
+    return tama;
 }
 
 void iniciar_FIFO(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
