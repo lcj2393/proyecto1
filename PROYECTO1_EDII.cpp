@@ -36,6 +36,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
     char opc_mp;
     int opc_sm;
     do{
+        system("cls");
         printf("\n\t\t MENU PROYECTO 1 - EDII \n\n");
         printf("\n a. LISTAS LIFO");
         printf("\n b. LISTAS FIFO ");
@@ -91,6 +92,8 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                         printf("\n El primer elemento es %d \n",n);
                         break;
                     case 2:
+                        n=pila->Siguiente->dato;
+                        printf("\n El ultimo elemento es %d \n",n);
                         break;
                     case 3:
                         printf("\nMOSTRAR TODOS LOS ELEMENTOS \n\n");
@@ -125,6 +128,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     printf("\nLista eliminada correctamente!\n\n");
                     break;
                 case 0:
+                    system("cls");
                     menu();
                     break;
                 default: printf("\n Ingreso una opcion invalida!!! \n\n");
@@ -133,6 +137,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
 
                 break;
             case 'b':
+                system("cls");
                 printf("\t\t\n MENU FIFO \n\n");
                 printf("\n 1. CREAR LISTA");
                 printf("\n 2. INSERTAR ELEMENTOS ");
@@ -180,6 +185,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     case 9:
                         break;
                     case 0:
+                        system("cls");
                         menu();
                         break;
                     default: printf("\n Ingreso una opcion invalida!!! \n\n");
@@ -187,6 +193,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                 }
                 break;
             case 'c':
+                system("cls");
                 printf("\t\t\n MENU LISTAS CIRCULARES SIMPLEMENTE ENLAZADAS \n\n");
                 printf("\n 1. CREAR LISTA");
                 printf("\n 2. INSERTAR ELEMENTOS ");
@@ -264,6 +271,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     case 9:
                         break;
                     case 0:
+                        system("cls");
                         menu();
                         break;
                     default: printf("\n Ingreso una opcion invalida!!! \n\n");
@@ -271,6 +279,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                 }
                 break;
             case 'd':
+                system("cls");
                 printf("\t\t\n MENU LISTAS CIRCULARES DOBLEMENTE ENLAZADAS \n\n");
                 printf("\n 1. CREAR LISTA");
                 printf("\n 2. INSERTAR ELEMENTOS ");
@@ -348,6 +357,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     case 9:
                         break;
                     case 0:
+                        system("cls");
                         menu();
                         break;
                     default: printf("\n Ingreso una opcion invalida!!! \n\n");
@@ -356,6 +366,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                 break;
 
             case 'e':
+                system("cls");
                 printf("\t\t\n MENU LISTAS SIMPLEMENTE ENLAZADAS \n\n");
                 printf("\n 1. CREAR LISTA");
                 printf("\n 2. INSERTAR ELEMENTOS ");
@@ -433,6 +444,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     case 9:
                         break;
                     case 0:
+                        system("cls");
                         menu();
                         break;
                     default: printf("\n Ingreso una opcion invalida!!! \n\n");
@@ -441,6 +453,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                 break;
 
             case 'f':
+                system("cls");
                 printf("\t\t\n MENU LISTAS DOBLEMENTE ENLAZADAS \n\n");
                 printf("\n 1. CREAR LISTA");
                 printf("\n 2. INSERTAR ELEMENTOS ");
