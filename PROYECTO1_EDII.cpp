@@ -93,7 +93,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     scanf("%d", &opc_sm);
                     switch(opc_sm){
                     case 1:
-                        n=pila->dato;
+                        n=pila;
                         printf("\n El primer elemento es %d \n",n);
                         break;
                     case 2:
@@ -114,20 +114,18 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     printf("\nBUSCAR ELEMENTOS\n\n");
                     printf("Digite valor a buscar en la pila: ");
                     scanf("%d",&dbusc);
-
                     while(pila!=NULL){
-                    n=pila->dato;
-                    if(n==dbusc){
+                    if(pila->dato==dbusc){
                         printf("\nEl valor buscado <%d>, se encuentra en la lista LIFO\n",dbusc);
                         vald=true;
                         pila=pila->Siguiente;
                         }else{
                             pila=pila->Siguiente;
                         }
-                    }
+                    }/*
                     if(vald!=true){
                         printf("\nEl valor buscado <%d>, no se encuentra en la lista LIFO\n",dbusc);
-                    }
+                    }*/
                     break;
                 case 5:
                     printf("\ELIMINAR ELEMENTOS\n\n");
