@@ -1,6 +1,9 @@
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #define reservar_memoria (Nodo *)malloc(sizeof(Nodo))
+
+using namespace std;
 
 struct Nodo{
     int dato;
@@ -11,23 +14,14 @@ void menu();//FUNION PARA EL MENU COMPLETO Y SUBMENU
 
 void iniciar_LIFO();//FUNCION PAR AINICIALIZAR LA PILA EN NULL
 void ins_LIFO(Nodo *&, int);//FUNCION PARA INSERTAR ELEMENTOS EN LISTA LIFO
-void most_LIFO(Nodo *&);//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
+void most_LIFO(Nodo *);//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
+void buscar_LIFO(Nodo *, int);//FUNCION PARA BUSCAR EN LA PILA
 void quit_LIFO(Nodo *&, int &);//FUNCION PARA LIMPIAR PILA
 bool vacia_LIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA VACIA
 void elim_LIFO();//FUNCION PARA VACIAR LA PILA EN NULL
-//void busc_LIFO(Nodo *&, int, int);
-int tama_LIFO(Nodo *&);
-
-void iniciar_FIFO();
-void ins_FIFO(Nodo *&inicio, Nodo *&fin, int num);
-void most_FIFO(Nodo *&inicio, Nodo *&fin);
-void quit_FIFO(Nodo *&inicio, Nodo *&fin, int num);
-bool vacia_FIFO(Nodo *&inicio);
-void elim_FIFO();
 
 int main(){
     menu();
-
     system("cls");
     printf("\n\n\n\t\t\tHAS SALIDO DEL PROGRAMA, VUELVA PRONTO!!!\n\n\n\n");
     system("Pause");
@@ -36,12 +30,11 @@ int main(){
 
 void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
     Nodo * pila = NULL;
-    Nodo * inicio = NULL;
-    Nodo * fin = NULL;
 
     char opc_mp;
-    int n,opc_sm,dbusc;
+    int n,opc_sm,dbusc, i=0;
     bool vald=false;
+    int nuevo_dato;
     do{
         system("cls");
         printf("\n\t\t MENU PROYECTO 1 - EDII \n\n");
@@ -82,8 +75,11 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
                     while(n!=0){
                         scanf("%d",&n);
+                        if(n!=0){
                         ins_LIFO(pila,n);
+                        }
                     }
+                    printf("\n\n");
                     break;
                 case 3:
                     printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
@@ -92,18 +88,13 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     printf("\n Ingrese una opcion: ");
                     scanf("%d", &opc_sm);
                     switch(opc_sm){
-                    case 1:
-                        n=pila;
-                        printf("\n El primer elemento es %d \n",n);
+                    case 1: printf("\n El primer elemento es: <<%d>> \n",pila->dato);
                         break;
-                    case 2:
-
-                        printf("\n El ultimo elemento es %d \n",n);
+                    case 2: printf("\n El ultimo elemento es %d \n",pila->dato);
                         break;
                     case 3:
                         printf("\nMOSTRAR TODOS LOS ELEMENTOS \n\n");
                         printf("\nLa lista LIFO contiene los siguientes elementos: \n\n");
-                        //n=tama_LIFO(pila);
                         most_LIFO(pila);
                         printf("\n\n<<%d>>",n);
                         break;
@@ -111,29 +102,18 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     }
                     break;
                 case 4:
+                    int buscar;
                     printf("\nBUSCAR ELEMENTOS\n\n");
                     printf("Digite valor a buscar en la pila: ");
-                    scanf("%d",&dbusc);
-                    while(pila!=NULL){
-                    if(pila->dato==dbusc){
-                        printf("\nEl valor buscado <%d>, se encuentra en la lista LIFO\n",dbusc);
-                        vald=true;
-                        pila=pila->Siguiente;
-                        }else{
-                            pila=pila->Siguiente;
-                        }
-                    }/*
-                    if(vald!=true){
-                        printf("\nEl valor buscado <%d>, no se encuentra en la lista LIFO\n",dbusc);
-                    }*/
+                    scanf("%d",&buscar);
+                    buscar_LIFO(pila,buscar);
                     break;
                 case 5:
                     printf("\ELIMINAR ELEMENTOS\n\n");
                     printf("Digite valor a eliminar de la pila: ");
                     scanf("%d",&dbusc);
                     while(pila!=NULL){
-                    n=pila->dato;
-                    if(n==dbusc){
+                    if(pila->dato==dbusc){
                         quit_LIFO(pila,dbusc);
                         pila=pila->Siguiente;
                         printf("\nEl valor buscado <%d>, fue eliminado de la lista LIFO\n",dbusc);
@@ -147,10 +127,34 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     }
                     break;
                 case 6:
+                    printf("\EDITAR ELEMENTOS\n\n");
+                    printf("Digite valor a cambiar de la pila: ");
+                    scanf("%d",&dbusc);
+                    Nodo *aux1 = NULL;
+                    aux1= reservar_memoria;
+                    aux1=pila;
+                    while(aux1!=NULL){
+                    if(aux1->dato==dbusc){
+                        quit_LIFO(aux1,dbusc);
+                        printf("\nDigite el nuevo valor a ingresar: ");
+                        scanf("%d",&nuevo_dato);
+                        ins_LIFO(aux1,nuevo_dato);
+                        aux1=aux1->Siguiente;
+                        printf("\nEl valor <%d>, fue reemplazado por <%d>de la LIFO\n",dbusc,nuevo_dato);
+                        vald=true;
+                        }else{
+                            aux1=aux1->Siguiente;
+                        }
+                    }
+                    if(vald!=true){
+                        printf("\nEl valor buscado <%d>, no se encuentra en la lista LIFO\n",dbusc);
+                    }
                     break;
                 case 7:
                     printf("\nELIMINAR ELEMENTOS\n\n");
-                    quit_LIFO(pila, n);
+                        while(pila!=NULL){
+                        quit_LIFO(pila,&n);
+                        }
                     printf("\nElementos eliminados correctamente!\n\n");
                     break;
                 case 8:
@@ -158,7 +162,7 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
                     if(vacia_LIFO(pila)==true){
                         printf("\nLa lista LIFO esta vacia!\n\n");
                     }else{
-                        printf("\nLa lista LIFO  no esta vacia!\n\n");
+                        printf("\nLa lista LIFO  no esta vacia! ((%d))\n\n",pila->dato);
                     }
                     break;
                 case 9:
@@ -625,20 +629,23 @@ void menu(){//MENU Y SUB MENU GENERALES DEL PROGRAMA
         system("Pause");
         system("cls");
         }while(opc_mp != 's');
+    system("cls");
+    printf("\n\n\n\t\t\tHAS SALIDO DEL PROGRAMA, VUELVA PRONTO!!!\n\n\n\n");
+    system("Pause");
 }
-void iniciar_LIFO(){//FUNCION PAR AINICIALIZAR LA PILA EN NULL
+void iniciar_LIFO(){//FUNCION PAR AINICIALIZAR LA PILA EN NULL (OK)
     Nodo * pila = NULL;
 }
-void ins_LIFO(Nodo *&pila, int n){//FUNCION INSERTAR ELEMENTOS EN PILA
+void ins_LIFO(Nodo *&pila, int n){//FUNCION INSERTAR ELEMENTOS EN PILA (OK)
 
     Nodo *nuevo_nodo = reservar_memoria;
     nuevo_nodo->dato=n;
     nuevo_nodo->Siguiente=pila;
     pila= nuevo_nodo;
 }
-void most_LIFO(Nodo *&pila){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
-    while(pila!=NULL){
-        printf("%d",pila->dato);
+void most_LIFO(Nodo *pila){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
+    while(vacia_LIFO(pila)!=true){
+        printf("<%d>",pila->dato);
         pila=pila->Siguiente;
     }
 }
@@ -654,55 +661,22 @@ bool vacia_LIFO(Nodo *&pila){//FUNCION PARA VALIDAR SI LA PILA ESTA VACIA
 void elim_LIFO(){//FUNCION PARA VACIAR LA PILA EN NULL
     Nodo * pila = NULL;
 }
+void buscar_LIFO(Nodo *pila, int datobuscado){//FUNCION PARA BUSCAR EN LA PILA
+    bool encontrado;
+    Nodo *primero=reservar_memoria;
+    primero=pila;
 
-int tama_LIFO(Nodo *&pila){
-    int tama=0;
-    while(pila!=NULL){
-        tama++;
-    }
-    return tama;
-}
+    if(pila!=NULL){
+        while (primero!=NULL){
+        if(primero->dato==datobuscado){
+                encontrado=true;
+            }
+                primero=primero->Siguiente;
+        }
 
-void iniciar_FIFO(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
-    Nodo * inicio = NULL;
-    Nodo * fin = NULL;
-}
-void ins_FIFO(Nodo *&inicio, Nodo *&fin, int n){//FUNCION INSERTAR ELEMENTOS EN LA COLA
-    int numero;
-    Nodo *nuevo_nodo = reservar_memoria;
-    nuevo_nodo -> dato = numero;
-    nuevo_nodo -> Siguiente = NULL;
-    if(vacia_FIFO(inicio)){
-        inicio = nuevo_nodo;
-    }else{
-        fin -> Siguiente = nuevo_nodo;
+    }else{  printf("\nEl dato consultado, no se encuentra en la pila!\n");}
+
+    if(encontrado){
+        printf("\nEl dato consultado, se encuentra en la pila!!");
     }
-    fin = nuevo_nodo;
-}
-void most_FIFO(Nodo *& inicio, Nodo *&fin){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
-    Nodo * aux=NULL;
-    //aux=*Nodo;
-    while(aux!=NULL){
-        printf("%d",aux->dato);
-        aux=aux->Siguiente;
-    }
-}
-void quit_FIFO(Nodo *&inicio, Nodo *&fin, int &n){//FUNCION PARA LIMPIAR COLA
-    n = inicio -> dato;
-    Nodo *aux = reservar_memoria;
-    aux = inicio;
-    if(inicio == fin){
-        inicio = NULL;
-        fin = NULL;
-    }else{
-        inicio = aux -> Siguiente;
-    }
-    free(aux);
-}
-bool vacia_FIFO(Nodo *&inicio){//FUNCION PARA VALIDAR SI LA COLA ESTA VACIA
-    return (inicio==NULL)?true: false;
-}
-void elim_FIFO(){//FUNCION PARA VACIAR LA COLA EN NULL
-    Nodo * inicio = NULL;
-    Nodo * fin = NULL;
 }
