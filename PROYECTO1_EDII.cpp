@@ -22,7 +22,7 @@ void elim_LIFO();//FUNCION PARA VACIAR LA PILA EN NULL
 
 void iniciar_FIFO();//FUNCION PAR AINICIALIZAR LA COLA EN NULL
 void ins_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
-void most_FIFO(Nodo *&, Nodo *&);//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
+void most_FIFO(Nodo *);//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
 void buscar_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA BUSCAR EN LA COLA
 void quit_LIFO(Nodo *&, Nodo *&, int &);//FUNCION PARA LIMPIAR COLA
 bool vacia_FIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA COLA
@@ -217,16 +217,26 @@ int main(){
                         printf("\n Ingrese una opcion: ");
                         scanf("%d", &opc_sm);
                         switch(opc_sm){
-                        case 1:
+                        case 1:printf("\n\t\t PRIMER ELEMENTO FIFO\n");
+                                printf("\nEl primer elemento es <%d>\n\n",inicio->dato);
                             break;
-                        case 2:
+                        case 2:printf("\n\t\t ULTIMO ELEMENTO FIFO\n");
+                                printf("\nEl ultimo elemento es <%d>\n\n",inicio->Siguiente->Siguiente->dato);
                             break;
-                        case 3:
+                        case 3:printf("\n\t\t TODOS LOS ELEMENTOS FIFO\n");
+                                printf("\nLos elemntos de la FIFO son: \n\n");
+                                most_FIFO(inicio);
                             break;
                         default: printf("\n Ingreso una opcion invalida!!! \n\n");
                         }
                         break;
-                    case 4:
+                    case 4:printf("\n\t\t BUSCAR ELEMENTOS EN FIFO\n");
+                            printf("\nDigite valor a buscar: \n");
+                            scanf("%d",&dbusc);
+
+                            buscar_FIFO(inicio,fin,dbusc);
+                            printf("\n\n");
+
                         break;
                     case 5:
                         break;
@@ -706,13 +716,14 @@ void ins_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA INSERTAR ELEMEN
     }
     fin = nuevo_nodo;
 }
-/*
-void most_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
-    while(vacia_LIFO(pila)!=true){
-        printf("<%d>",pila->dato);
-        pila=pila->Siguiente;
+
+void most_FIFO(Nodo *inicio){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
+    while(vacia_LIFO(inicio)!=true){
+        printf("<%d>, ",inicio->dato);
+        inicio=inicio->Siguiente;
     }
 }
+/*
 void quit_FIFO(Nodo *&inicio, Nodo *&fin, int &num){//FUNCION PARA LIMPIAR COLA
     Nodo *aux=pila;
     n=aux->dato;
@@ -722,29 +733,30 @@ void quit_FIFO(Nodo *&inicio, Nodo *&fin, int &num){//FUNCION PARA LIMPIAR COLA
 bool vacia_FIFO(Nodo *&inicio){//FUNCION PARA VALIDAR SI LA COLA ESTA VACIA
     return (inicio==NULL)?true: false;
 }
-/*
+
 void elim_FIFO(){//FUNCION PARA VACIAR LA COLA EN NULL
     Nodo * inicio = NULL;
     Nodo * fin = NULL;
 }
+
 void buscar_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA COLA
-    bool encontrado;
+    bool encontrado=false;
     Nodo *primero=reservar_memoria;
-    primero=pila;
+    primero=inicio;
 
-    if(pila!=NULL){
-        while (primero!=NULL){
-        if(primero->dato==datobuscado){
-                encontrado=true;
+    if(vacia_FIFO(inicio)!=true){
+        while (primero!=fin){
+        if(primero->dato==num){
+            encontrado=true;
             }
-                primero=primero->Siguiente;
+            primero=primero->Siguiente;
         }
-
-    }else{  printf("\nEl dato consultado, no se encuentra en la pila!\n");}
-
+    }
     if(encontrado){
-        printf("\nEl dato consultado, se encuentra en la pila!!");
+        printf("\nEl dato %d, se encuentra en la Cola!!",num);
+    }else{
+        printf("\nEl dato %d, no se encuentra en la Cola!\n",num);
     }
 }
 
-*/
+
