@@ -30,6 +30,16 @@ void elim_FIFO();//FUNCION PARA VACIAR LA COLA EN NULL
 bool elim_elemento_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA ELIMINAR ELEMENTO DE LA COLA
 bool edit_elemento_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA EDITAR ELEMENTO DE LA COLA
 
+void iniciar_CIRC();//FUNCION PARA INICIALIZAR LA COLA EN NULL
+void ins_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
+void most_CIRC(Nodo *);//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
+bool buscar_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA BUSCAR EN LA COLA
+void quit_CIRC(Nodo *&, Nodo *&, int &);//FUNCION PARA LIMPIAR COLA
+bool vacia_CIRC()*&);//FUNCION PARA VALIDAR SI LA PILA ESTA COLA
+void elim_CIRC();//FUNCION PARA VACIAR LA COLA EN NULL
+bool elim_elemento_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA ELIMINAR ELEMENTO DE LA COLA
+bool edit_elemento_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA EDITAR ELEMENTO DE LA COLA
+
 
 int main(){
     Nodo * pila = NULL;
@@ -37,7 +47,7 @@ int main(){
     Nodo * fin = NULL;
 
     char opc_mp;
-    int n,opc_sm,dbusc, i=0;
+    int n,opc_sm,dbusc, tam;
     bool vald=false;
     int nuevo_dato;
     do{
@@ -729,7 +739,6 @@ void buscar_LIFO(Nodo *pila, int datobuscado){//FUNCION PARA BUSCAR EN LA PILA
     }
 }
 
-
 void iniciar_FIFO(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
     Nodo * inicio = NULL;
     Nodo * fin = NULL;
@@ -785,7 +794,6 @@ bool elim_elemento_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCA
     }
     return eliminado;
 }
-
 bool buscar_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA COLA
     bool encontrado=false;
     Nodo *primero=reservar_memoria;
@@ -801,7 +809,6 @@ bool buscar_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA
     }
     return encontrado;
 }
-
 bool edit_elemento_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA EDITAR ELEMENTO DE LA COLA
     bool editado=false;
     Nodo *primero=reservar_memoria;
@@ -817,4 +824,92 @@ bool edit_elemento_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA EDITA
     }
     return editado;
 }
+
+
+void iniciar_CIRC(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
+    Nodo * inicio = NULL;
+    Nodo * fin = NULL;
+}
+void ins_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
+    Nodo *nuevo_nodo = reservar_memoria;
+    nuevo_nodo -> dato = num;
+    nuevo_nodo -> Siguiente = NULL;
+    if((vacia_FIFO(inicio))){
+        inicio = nuevo_nodo;
+    }else{
+        fin -> Siguiente = nuevo_nodo;
+    }
+    fin = nuevo_nodo;
+}
+void most_CIRC(Nodo *inicio){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
+    while(vacia_LIFO(inicio)!=true){
+        printf("<%d>, ",inicio->dato);
+        inicio=inicio->Siguiente;
+    }
+}
+void quit_CIRC(Nodo *&inicio, Nodo *&fin, int &num){//FUNCION PARA LIMPIAR COLA
+    num = inicio -> dato;
+    Nodo *aux = reservar_memoria;
+    aux = inicio;
+    if(inicio == fin){
+        inicio = NULL;
+        fin = NULL;
+    }else{
+        inicio = aux -> Siguiente;
+    }
+    free(aux);
+}
+bool vacia_CIRC(Nodo *&inicio){//FUNCION PARA VALIDAR SI LA COLA ESTA VACIA
+    return (inicio==NULL)?true: false;
+}
+void elim_CIRC(){//FUNCION PARA VACIAR LA COLA EN NULL
+    Nodo * inicio = NULL;
+    Nodo * fin = NULL;
+}
+bool elim_elemento_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA COLA
+    bool eliminado=false;
+    Nodo *primero=reservar_memoria;
+    primero=inicio;
+    if(vacia_FIFO(inicio)!=true){
+        while (primero!=fin){
+        if(primero->dato==num){
+            quit_FIFO(inicio,fin,num);
+            eliminado=true;
+            }
+            primero=primero->Siguiente;
+        }
+    }
+    return eliminado;
+}
+bool buscar_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA COLA
+    bool encontrado=false;
+    Nodo *primero=reservar_memoria;
+    primero=inicio;
+
+    if(vacia_FIFO(inicio)!=true){
+        while (primero!=fin){
+        if(primero->dato==num){
+            encontrado=true;
+            }
+            primero=primero->Siguiente;
+        }
+    }
+    return encontrado;
+}
+bool edit_elemento_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA EDITAR ELEMENTO DE LA COLA
+    bool editado=false;
+    Nodo *primero=reservar_memoria;
+    primero=inicio;
+    if(vacia_FIFO(inicio)!=true){
+        while (primero!=fin){
+        if(primero->dato==num){
+            quit_FIFO(inicio,fin,num);
+            editado=true;
+            }
+            primero=primero->Siguiente;
+        }
+    }
+    return editado;
+}
+
 
