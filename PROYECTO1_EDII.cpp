@@ -35,11 +35,10 @@ void ins_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA INSERTAR ELEMENTOS A LA COL
 void most_CIRC(Nodo *);//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
 bool buscar_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA BUSCAR EN LA COLA
 void quit_CIRC(Nodo *&, Nodo *&, int &);//FUNCION PARA LIMPIAR COLA
-bool vacia_CIRC()*&);//FUNCION PARA VALIDAR SI LA PILA ESTA COLA
+bool vacia_CIRC(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA COLA
 void elim_CIRC();//FUNCION PARA VACIAR LA COLA EN NULL
 bool elim_elemento_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA ELIMINAR ELEMENTO DE LA COLA
 bool edit_elemento_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA EDITAR ELEMENTO DE LA COLA
-
 
 int main(){
     Nodo * pila = NULL;
@@ -105,7 +104,14 @@ int main(){
                     switch(opc_sm){
                     case 1: printf("\n El primer elemento es: <<%d>> \n",pila->dato);
                         break;
-                    case 2: printf("\n El ultimo elemento es %d \n",pila->dato);
+                    case 2:
+                        while(pila!=NULL){
+                                n=pila->dato;
+                            if(pila->Siguiente==NULL){
+                                printf("\n El ultimo elemento es %d \n",n);
+                                pila=pila->Siguiente;
+                            }else{pila=pila->Siguiente;}
+                        }
                         break;
                     case 3:
                         printf("\nMOSTRAR TODOS LOS ELEMENTOS \n\n");
@@ -312,6 +318,10 @@ int main(){
                 scanf("%d", &opc_sm);
                 switch(opc_sm){
                     case 1:
+                        printf("\n\t\t CREAR LISTA CIRCULAR\n");
+                        iniciar_CIRC();
+                        tam=0;
+                        printf("\nLista Cicular creada e iniciada exitosamente!\n");
                         break;
                     case 2:
                         printf("\n 1. AL INICIO ");
@@ -326,6 +336,7 @@ int main(){
 
                         switch(opc_sm){
                         case 1:
+
                             break;
                         case 2:
                             break;
@@ -829,12 +840,13 @@ bool edit_elemento_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA EDITA
 void iniciar_CIRC(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
     Nodo * inicio = NULL;
     Nodo * fin = NULL;
+
 }
 void ins_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
     Nodo *nuevo_nodo = reservar_memoria;
     nuevo_nodo -> dato = num;
     nuevo_nodo -> Siguiente = NULL;
-    if((vacia_FIFO(inicio))){
+    if(vacia_CIRC(inicio)){
         inicio = nuevo_nodo;
     }else{
         fin -> Siguiente = nuevo_nodo;
