@@ -22,7 +22,7 @@ void elim_LIFO();//FUNCION PARA VACIAR LA PILA EN NULL
 
 void iniciar_FIFO();//FUNCION PAR AINICIALIZAR LA COLA EN NULL
 void ins_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
-void most_FIFO(Nodo *);//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
+void most_FIFO(Nodo *, Nodo *);//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
 bool buscar_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA BUSCAR EN LA COLA
 void quit_FIFO(Nodo *&, Nodo *&, int &);//FUNCION PARA LIMPIAR COLA
 bool vacia_FIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA COLA
@@ -195,7 +195,6 @@ int main(){
                 default: printf("\n Ingreso una opcion invalida!!! \n\n");
                     break;
             }
-
                 break;
             case 'b':
                 system("cls");
@@ -229,22 +228,28 @@ int main(){
                         }
                         printf("\nDatos ingresados correctamente!!\n\n");
                         break;
-                    case 3:
+                case 3:
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
                         printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
                         printf("\n Ingrese una opcion: ");
                         scanf("%d", &opc_sm);
                         switch(opc_sm){
-                        case 1:printf("\n\t\t PRIMER ELEMENTO FIFO\n");
-                                printf("\nEl primer elemento es <%d>\n\n",inicio->dato);
+                        case 1: printf("\n El primer elemento es: <<%d>> \n",inicio->dato);
                             break;
-                        case 2:printf("\n\t\t ULTIMO ELEMENTO FIFO\n");
-                                printf("\nEl ultimo elemento es <%d>\n\n",inicio->Siguiente->Siguiente->dato);
+                        case 2:
+                            while(inicio!=NULL){
+                                    n=inicio->dato;
+                                if(inicio->Siguiente==NULL){
+                                    printf("\n El ultimo elemento es %d \n",n);
+                                    inicio=inicio->Siguiente;
+                                }else{inicio=inicio->Siguiente;}
+                            }
                             break;
-                        case 3:printf("\n\t\t TODOS LOS ELEMENTOS FIFO\n");
-                                printf("\nLos elemntos de la FIFO son: \n\n");
-                                most_FIFO(inicio);
+                        case 3:
+                            printf("\nMOSTRAR TODOS LOS ELEMENTOS \n\n");
+                            printf("\nLa lista LIFO contiene los siguientes elementos: \n\n");
+                            most_FIFO(inicio, fin);
                             break;
                         default: printf("\n Ingreso una opcion invalida!!! \n\n");
                         }
@@ -765,9 +770,9 @@ void ins_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA INSERTAR ELEMEN
     }
     fin = nuevo_nodo;
 }
-void most_FIFO(Nodo *inicio){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
-    while(vacia_LIFO(inicio)!=true){
-        printf("<%d>, ",inicio->dato);
+void most_FIFO(Nodo *inicio, Nodo *fin){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
+    while(vacia_LIFO(fin)!=false){
+        printf("\n-<%d>-, ",inicio->dato);
         inicio=inicio->Siguiente;
     }
 }
@@ -923,5 +928,4 @@ bool edit_elemento_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA EDITA
     }
     return editado;
 }
-
 
