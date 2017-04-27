@@ -10,6 +10,10 @@ struct Nodo{
     Nodo *Siguiente;
 };
 
+    Nodo * pila = NULL;
+    Nodo * inicio = NULL;
+    Nodo * fin = NULL;
+
 //void menu();//FUNION PARA EL MENU COMPLETO Y SUBMENU
 
 void iniciar_LIFO();//FUNCION PAR AINICIALIZAR LA PILA EN NULL
@@ -19,16 +23,16 @@ void buscar_LIFO(Nodo *, int);//FUNCION PARA BUSCAR EN LA PILA
 void quit_LIFO(Nodo *&, int &);//FUNCION PARA LIMPIAR PILA
 bool vacia_LIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA VACIA
 void elim_LIFO();//FUNCION PARA VACIAR LA PILA EN NULL
+void mod_LIFO();//FUNCION PARA MODIFICAR ELEMENTOS DE LA PILA
 
 void iniciar_FIFO();//FUNCION PAR AINICIALIZAR LA COLA EN NULL
 void ins_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
-void most_FIFO(Nodo *, Nodo *);//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
-bool buscar_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA BUSCAR EN LA COLA
-void quit_FIFO(Nodo *&, Nodo *&, int &);//FUNCION PARA LIMPIAR COLA
+void most_FIFO();//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
+void buscar_FIFO();//FUNCION PARA BUSCAR EN LA COLA
+void quit_FIFO();//FUNCION PARA LIMPIAR COLA
 bool vacia_FIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA COLA
 void elim_FIFO();//FUNCION PARA VACIAR LA COLA EN NULL
-bool elim_elemento_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA ELIMINAR ELEMENTO DE LA COLA
-bool edit_elemento_FIFO(Nodo *&, Nodo *&, int );//FUNCION PARA EDITAR ELEMENTO DE LA COLA
+void edit_elemento_FIFO();//FUNCION PARA EDITAR ELEMENTO DE LA COLA
 
 void iniciar_CIRC();//FUNCION PARA INICIALIZAR LA COLA EN NULL
 void ins_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
@@ -41,10 +45,6 @@ bool elim_elemento_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA ELIMINAR ELEMENTO
 bool edit_elemento_CIRC(Nodo *&, Nodo *&, int );//FUNCION PARA EDITAR ELEMENTO DE LA COLA
 
 int main(){
-    Nodo * pila = NULL;
-    Nodo * inicio = NULL;
-    Nodo * fin = NULL;
-
     char opc_mp;
     int n,opc_sm,dbusc, val;
     bool vald=false;
@@ -115,7 +115,7 @@ int main(){
                         break;
                     case 3:
                         printf("\nMOSTRAR TODOS LOS ELEMENTOS \n\n");
-                        printf("\nLa lista LIFO contiene los siguientes elementos: \n\n");
+                        printf("\nLa lista LIFO contiene los Siguientes elementos: \n\n");
                         most_LIFO(pila);
                         printf("\n\n<<%d>>",n);
                         break;
@@ -149,32 +149,16 @@ int main(){
                     break;
                 case 6:
                    printf("\nEDITAR ELEMENTOS\n\n");
-                   printf("Digite valor a cambiar de la pila: ");
-                   scanf("%d",&dbusc);
-                    while(pila!=NULL){
-                    if(pila->dato==dbusc){
-                        quit_LIFO(pila,dbusc);
-                        printf("\nDigite el nuevo valor a ingresar: ");
-                        scanf("%d",&nuevo_dato);
-                        ins_LIFO(pila,nuevo_dato);
-                        pila=pila->Siguiente;
-                        printf("\nEl valor <%d>, fue reemplazado por <%d>de la LIFO\n",dbusc,nuevo_dato);
-                        vald=true;
-                        }else{
-                            pila=pila->Siguiente;
-                        }
-                    }
-                    if(vald!=true){
-                        printf("\nEl valor buscado <%d>, no se encuentra en la lista LIFO\n",dbusc);
-                    }
+                   mod_LIFO();
                     break;
                 case 7:
                     printf("\nELIMINAR ELEMENTOS\n\n");
-                    while(pila!=NULL){
-                    quit_LIFO(pila,n);
+                    if(pila!=NULL){
+                        pila=NULL;
+                        printf("\n\nElementos de la Pila eliminados Correctamente!");
+                    }else{
+                            printf("\nLa Pila Ya se encuentra vacia!!");
                     }
-                    if(vacia_LIFO(pila)){
-                        printf("\nElementos eliminados correctamente!\n\n");}
                     break;
                 case 8:
                     printf("\nLIFO VACIA\n\n");
@@ -248,44 +232,24 @@ int main(){
                             break;
                         case 3:
                             printf("\nMOSTRAR TODOS LOS ELEMENTOS \n\n");
-                            printf("\nLa lista LIFO contiene los siguientes elementos: \n\n");
-                            most_FIFO(inicio, fin);
+                            printf("\nLa lista LIFO contiene los Siguientes elementos: \n\n");
+                            most_FIFO();
                             break;
                         default: printf("\n Ingreso una opcion invalida!!! \n\n");
                         }
                         break;
                     case 4:printf("\n\t\t BUSCAR ELEMENTOS EN FIFO\n");
-                            printf("\nDigite valor a buscar: \n");
-                            scanf("%d",&dbusc);
-                            if(buscar_FIFO(inicio,fin,dbusc)){
-                                printf("\nEl dato %d, se encuentra en la Cola!!",dbusc);
-                            }else{
-                                printf("\nEl dato %d, no se encuentra en la Cola!\n",dbusc);
-                            }   printf("\n\n");
+                            buscar_FIFO();
                         break;
                     case 5:printf("\n\t\t ELIMINAR ELEMENTO EN FIFO\n");
-                            printf("\nDigite valor a eliminar de la Cola: \n");
-                            scanf("%d",&dbusc);
-                            if(elim_elemento_FIFO(inicio,fin,dbusc)){
-                                printf("\nEl dato %d, fue eliminado de la Cola!!",dbusc);
-                            }else{
-                                printf("\nEl dato %d, no fue eliminado de la Cola!\n",dbusc);
-                            }   printf("\n\n");
+                           quit_FIFO();
                         break;
                     case 6:printf("\n\t\t EDITAR ELEMENTO EN FIFO\n");
-                        printf("\nDigite valor a editar de la Cola: \n");
-                        scanf("%d",&dbusc);
-                        if(edit_elemento_FIFO(inicio,fin,dbusc)){
-                            printf("\nEl dato %d, fue insertado a la Cola!!",dbusc);
-                        }else{
-                            printf("\nEl dato %d, no fue insertado a la Cola!\n",dbusc);
-                        }   printf("\n\n");
+                            edit_elemento_FIFO();
                         break;
                     case 7:printf("\n\t\t VACIAR ELEMENTOS DE FIFO\n");
-                            while(vacia_FIFO(inicio)!=true){
-                                quit_FIFO(inicio,fin,n);
-                            }
-                            printf("\nElementos eliminados correctamente de la Cola!\n\n");
+                            elim_FIFO();
+
                         break;
                     case 8:
                         printf("\nLIFO VACIA\n\n");
@@ -325,15 +289,14 @@ int main(){
                     case 1:
                         printf("\n\t\t CREAR LISTA CIRCULAR\n");
                         iniciar_CIRC();
-                        tam=0;
                         printf("\nLista Cicular creada e iniciada exitosamente!\n");
                         break;
                     case 2:
                         printf("\n 1. AL INICIO ");
                         printf("\n 2. AL FINAL ");
-                        printf("\n 3. DESPUES DE UN NODO ");
-                        printf("\n 4. ANTES DE UN NODO ");
-                        printf("\n 5. EN MEDIO DE DOS NODOS ");
+                        printf("\n 3. DESPUES DE UN Nodo ");
+                        printf("\n 4. ANTES DE UN Nodo ");
+                        printf("\n 5. EN MEDIO DE DOS NodoS ");
                         printf("\n 6. EN FORMA ASCENDENTE ");
                         printf("\n 7. EN FORMA DESCENDENTE ");
                         printf("\n Ingrese una opcion: ");
@@ -348,9 +311,9 @@ int main(){
                                 if(inicio==NULL && fin==NULL){
                                     ins_CIRC(inicio,fin,n);
                                     inicio=inicio->Siguiente;
-                                    printf("\n\nValor ingresado correctamente!")
+                                    printf("\n\nValor ingresado correctamente!\n");
                                 }else{
-                                    printf("\No es posible agregar valor, el principio no esta vacio!!\n\n");
+                                    printf("\nNo es posible agregar valor, el principio no esta vacio!!\n\n");
                                 }
                             }
                             break;
@@ -362,14 +325,14 @@ int main(){
                                 if(inicio->Siguiente == fin){
                                     ins_CIRC(inicio,fin,n);
                                     inicio=inicio->Siguiente;
-                                    printf("\n\nValor ingresado correctamente!")
+                                    printf("\n\nValor ingresado correctamente!\n");
                                 }else{
-                                    printf("\No es posible agregar valor, el principio no esta vacio!!\n\n");
+                                    printf("\nNo es posible agregar valor, el principio no esta vacio!!\n\n");
                                 }
                             }
                             break;
                         case 3:
-                            printf("\n\t\t INSERTAR VALOR DESPUES DE UN NODO\n");
+                            printf("\n\t\t INSERTAR VALOR DESPUES DE UN Nodo\n");
                             printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
                             while(n!=0){
                                 while(inicio!=NULL){
@@ -377,26 +340,26 @@ int main(){
                                     if(inicio->Siguiente==NULL ){
                                         ins_CIRC(inicio,fin,n);
                                         inicio=inicio->Siguiente;
-                                        printf("\n\nValor ingresado correctamente!")
+                                        printf("\n\nValor ingresado correctamente!\n");
                                     }else{
-                                        printf("\No es posible agregar valor, vuelva a intentar!!\n\n");
+                                        printf("\nNo es posible agregar valor, vuelva a intentar!!\n\n");
                                         inicio=inicio->Siguiente;
                                     }
                                 }
                             }
                             break;
                         case 4:
-                            printf("\n\t\t INSERTAR VALOR ANTES DE UN NODO\n");
+                            printf("\n\t\t INSERTAR VALOR ANTES DE UN Nodo\n");
                             printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
                             while(n!=0){
                                 while(inicio!=NULL){
-                                    if(inicio->dato==NULL ){
+                                    if(inicio->Siguiente==NULL){
                                         scanf("%d",&n);
                                         inicio->dato=n;
                                         inicio=inicio->Siguiente;
-                                        printf("\n\nValor ingresado correctamente!")
+                                        printf("\n\nValor ingresado correctamente!\n");
                                     }else{
-                                        printf("\No es posible agregar valor, vuelva a intentar!!\n\n");
+                                        printf("\nNo es posible agregar valor, vuelva a intentar!!\n\n");
                                         inicio=inicio->Siguiente;
                                     }
                                 }
@@ -411,9 +374,9 @@ int main(){
                                     if(inicio->Siguiente==NULL ){
                                         ins_CIRC(inicio,fin,n);
                                         inicio=inicio->Siguiente;
-                                        printf("\n\nValor ingresado correctamente!")
+                                        printf("\n\nValor ingresado correctamente!\n");
                                     }else{
-                                        printf("\No es posible agregar valor, vuelva a intentar!!\n\n");
+                                        printf("\nNo es posible agregar valor, vuelva a intentar!!\n\n");
                                         inicio=inicio->Siguiente;
                                     }
                                 }
@@ -432,7 +395,7 @@ int main(){
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
                         printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
-                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN NODO DADO ");
+                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
                         scanf("%d", &opc_sm);
                         switch(opc_sm){
@@ -485,9 +448,9 @@ int main(){
                     case 2:
                         printf("\n 1. AL INICIO ");
                         printf("\n 2. AL FINAL ");
-                        printf("\n 3. DESPUES DE UN NODO ");
-                        printf("\n 4. ANTES DE UN NODO ");
-                        printf("\n 5. EN MEDIO DE DOS NODOS ");
+                        printf("\n 3. DESPUES DE UN Nodo ");
+                        printf("\n 4. ANTES DE UN Nodo ");
+                        printf("\n 5. EN MEDIO DE DOS NodoS ");
                         printf("\n 6. EN FORMA ASCENDENTE ");
                         printf("\n 7. EN FORMA DESCENDENTE ");
                         printf("\n Ingrese una opcion: ");
@@ -517,7 +480,7 @@ int main(){
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
                         printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
-                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN NODO DADO ");
+                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
                         scanf("%d", &opc_sm);
                         switch(opc_sm){
@@ -571,9 +534,9 @@ int main(){
                     case 2:
                         printf("\n 1. AL INICIO ");
                         printf("\n 2. AL FINAL ");
-                        printf("\n 3. DESPUES DE UN NODO ");
-                        printf("\n 4. ANTES DE UN NODO ");
-                        printf("\n 5. EN MEDIO DE DOS NODOS ");
+                        printf("\n 3. DESPUES DE UN Nodo ");
+                        printf("\n 4. ANTES DE UN Nodo ");
+                        printf("\n 5. EN MEDIO DE DOS NodoS ");
                         printf("\n 6. EN FORMA ASCENDENTE ");
                         printf("\n 7. EN FORMA DESCENDENTE ");
                         printf("\n Ingrese una opcion: ");
@@ -603,7 +566,7 @@ int main(){
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
                         printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
-                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN NODO DADO ");
+                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
                         scanf("%d", &opc_sm);
                         switch(opc_sm){
@@ -657,9 +620,9 @@ int main(){
                     case 2:
                         printf("\n 1. AL INICIO ");
                         printf("\n 2. AL FINAL ");
-                        printf("\n 3. DESPUES DE UN NODO ");
-                        printf("\n 4. ANTES DE UN NODO ");
-                        printf("\n 5. EN MEDIO DE DOS NODOS ");
+                        printf("\n 3. DESPUES DE UN Nodo ");
+                        printf("\n 4. ANTES DE UN Nodo ");
+                        printf("\n 5. EN MEDIO DE DOS NodoS ");
                         printf("\n 6. EN FORMA ASCENDENTE ");
                         printf("\n 7. EN FORMA DESCENDENTE ");
                         printf("\n Ingrese una opcion: ");
@@ -689,7 +652,7 @@ int main(){
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
                         printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
-                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN NODO DADO ");
+                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
                         scanf("%d", &opc_sm);
                         switch(opc_sm){
@@ -780,17 +743,21 @@ void iniciar_LIFO(){//FUNCION PAR AINICIALIZAR LA PILA EN NULL (OK)
 }
 void ins_LIFO(Nodo *&pila, int n){//FUNCION INSERTAR ELEMENTOS EN PILA (OK)
 
-    Nodo *nuevo_nodo = reservar_memoria;
-    nuevo_nodo->dato=n;
-    nuevo_nodo->Siguiente=pila;
-    pila= nuevo_nodo;
+    Nodo *nuevo_Nodo = reservar_memoria;
+    nuevo_Nodo->dato=n;
+    nuevo_Nodo->Siguiente=pila;
+    pila= nuevo_Nodo;
 }
 void most_LIFO(Nodo *&pila){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
-    Nodo *aux1=NULL;
-    aux1=pila;
-    while(vacia_LIFO(aux1)!=true){
-        printf(" <%d> ",aux1->dato);
-        aux1=aux1->Siguiente;
+    Nodo * aux = reservar_memoria;
+    aux = pila;
+    if(pila != NULL){
+        while(aux != NULL){
+            printf("<%d>", aux->dato);
+            aux=aux->Siguiente;
+        }
+    }else{
+        printf("\n\nPila Vacia!!!");
     }
 }
 void quit_LIFO(Nodo *&pila, int &n){//FUNCION PARA LIMPIAR PILA
@@ -806,59 +773,109 @@ void elim_LIFO(){//FUNCION PARA VACIAR LA PILA EN NULL
     Nodo * pila = NULL;
 }
 void buscar_LIFO(Nodo *pila, int datobuscado){//FUNCION PARA BUSCAR EN LA PILA
-   bool encontrado;
-    Nodo *primero=reservar_memoria;
-    primero=pila;
-
-    if(pila!=NULL){
-        while (primero!=NULL){
-        if(primero->dato==datobuscado){
-                encontrado=true;
+    Nodo* aux = reservar_memoria;
+    aux = pila;
+    int nodo_consultado=0, encontrado=0;
+    printf("\nDigite Dato a consultar: ");
+    scanf("%d", &nodo_consultado);
+    if(pila != NULL){
+        while(aux != NULL){
+            if(aux->dato == nodo_consultado){
+                printf("\nEl Dato ( %d ) - Se encuentra en la Pila\n", nodo_consultado);
+                encontrado = 1;
             }
-                primero=primero->Siguiente;
+            aux = aux -> Siguiente;
         }
-
-    }else{  printf("\nEl dato consultado, no se encuentra en la pila!\n");}
-
-    if(encontrado){
-        printf("\nEl dato consultado, se encuentra en la pila!!");
+        if(encontrado == 0){
+            printf("\nEl Dato ( %d ) - No se encuentra en la Pila\n", nodo_consultado);
+        }
+    }else{
+        printf("\nPila Vacia\n");
     }
 }
+void mod_LIFO(){
+    Nodo* aux = reservar_memoria;
+    aux = pila;
+    int nodo_consultado = 0, encontrado = 0;
+    printf("\nDigite valor a buscar para editar: ");
+    scanf("%d", &nodo_consultado);
+    if(pila != NULL){
+        while(aux != NULL){
+            if(aux->dato == nodo_consultado){
+                printf("\nEl Dato ( %d ) - Se encuentra en la Pila\n", nodo_consultado);
+                printf("\nDigite Nuevo Dato: ");
+                scanf("%d", &aux->dato);
+                printf("\n\nNodo modificado Correctamente\n");
+                encontrado = 1;
+            }
+            aux = aux -> Siguiente;
+        }
+        if(encontrado == 0){
+            printf("\nEl Dato ( %d ) - No se encuentra en la Pila\n", nodo_consultado);
+        }
+    }else{
+        printf("\nPila Vacia\n");
+    }
+}
+
 
 void iniciar_FIFO(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
     Nodo * inicio = NULL;
     Nodo * fin = NULL;
 }
 void ins_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
-    Nodo *nuevo_nodo = reservar_memoria;
-    nuevo_nodo -> dato = num;
-    nuevo_nodo -> Siguiente = NULL;
+    Nodo *nuevo_Nodo = reservar_memoria;
+    nuevo_Nodo -> dato = num;
+    nuevo_Nodo -> Siguiente = NULL;
     if((vacia_FIFO(inicio))){
-        inicio = nuevo_nodo;
+        inicio = nuevo_Nodo;
     }else{
-        fin -> Siguiente = nuevo_nodo;
+        fin -> Siguiente = nuevo_Nodo;
     }
-    fin = nuevo_nodo;
+    fin = nuevo_Nodo;
 }
-void most_FIFO(Nodo *inicio, Nodo *fin){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
-    Nodo *aux2=NULL;
-    aux2=inicio;
-    while(aux2!=NULL){
-        printf("\n-<%d>-, ",aux2->dato);
-        aux2=aux2->Siguiente;
-    }
-}
-void quit_FIFO(Nodo *&inicio, Nodo *&fin, int &num){//FUNCION PARA LIMPIAR COLA
-    num = inicio -> dato;
+void most_FIFO(){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
     Nodo *aux = reservar_memoria;
     aux = inicio;
-    if(inicio == fin){
-        inicio = NULL;
-        fin = NULL;
+    if(inicio!= NULL){
+        while(aux != NULL){
+            printf("\n     %d", aux -> dato);
+            aux = aux -> Siguiente;
+        }
     }else{
-        inicio = aux -> Siguiente;
+        printf("\n\nCola Vacia!\n");
     }
-    free(aux);
+}
+void quit_FIFO(){//FUNCION PARA LIMPIAR COLA
+    Nodo * aux = reservar_memoria;
+    aux = inicio;
+    Nodo * anterior = reservar_memoria;
+    anterior = NULL;
+    int nodo_consultado = 0, encontrado = 0;
+    printf("\nDigite Dato a Eliminar: ");
+    scanf("%d", &nodo_consultado);
+    if(inicio != NULL){
+        while(aux != NULL && encontrado != 1){
+            if(aux->dato == nodo_consultado){
+                if(aux == inicio){
+                    inicio = inicio -> Siguiente;
+                }else{
+                    anterior -> Siguiente = aux -> Siguiente;
+                }
+                printf("\nDato Eliminado Con Exito!!\n");
+                encontrado = 1;
+            }
+            anterior = aux;
+            aux = aux -> Siguiente;
+        }
+        if(encontrado == 0){
+            printf("\nEl Dato No Ha Sido Encontrado\n");
+        }else{
+            free(anterior);
+        }
+    }else{
+        printf("\nCola Vacia!!\n");
+    }
 }
 bool vacia_FIFO(Nodo *&inicio){//FUNCION PARA VALIDAR SI LA COLA ESTA VACIA
     return (inicio==NULL)?true: false;
@@ -867,52 +884,51 @@ void elim_FIFO(){//FUNCION PARA VACIAR LA COLA EN NULL
     Nodo * inicio = NULL;
     Nodo * fin = NULL;
 }
-bool elim_elemento_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA COLA
-    bool eliminado=false;
-    Nodo *primero=reservar_memoria;
-    primero=inicio;
-    if(vacia_FIFO(inicio)!=true){
-        while (primero!=fin){
-        if(primero->dato==num){
-            quit_FIFO(inicio,fin,num);
-            eliminado=true;
+void buscar_FIFO(){//FUNCION PARA BUSCAR EN LA COLA
+    Nodo *aux = reservar_memoria;
+    aux = inicio;
+    int nodo_consultado = 0, encontrado = 0;
+    printf("\nDigite Valor a Consultar: ");
+    scanf("%d", &nodo_consultado);
+    if(inicio != NULL){
+        while(aux != NULL){
+            if(aux->dato == nodo_consultado){
+                printf("\nEl Dato ( %d ) - Se Ha Encontrado!!\n", nodo_consultado);
+                encontrado = 1;
             }
-            primero=primero->Siguiente;
+            aux = aux -> Siguiente;
         }
+        if(encontrado == 0){
+            printf("\nValor (%d) No Encontrado\n",nodo_consultado);
+        }
+    }else{
+        printf("\nCola Vacia\n");
     }
-    return eliminado;
 }
-bool buscar_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA COLA
-    bool encontrado=false;
-    Nodo *primero=reservar_memoria;
-    primero=inicio;
-
-    if(vacia_FIFO(inicio)!=true){
-        while (primero!=fin){
-        if(primero->dato==num){
-            encontrado=true;
+void edit_elemento_FIFO(){//FUNCION PARA EDITAR ELEMENTO DE LA COLA
+    Nodo* aux = reservar_memoria;
+    aux = inicio;
+    int nodo_consultado = 0, encontrado = 0;
+    printf("\nDigite Valor a consultar para editar: ");
+    scanf("%d", &nodo_consultado);
+    if(inicio != NULL){
+        while(aux != NULL){
+            if(aux->dato == nodo_consultado){
+                printf("\nEl Valor ( %d ) - Se ha encontrado\n\n", nodo_consultado);
+                printf("\nDigite Nuevo Dato: ");
+                scanf("%d", &aux->dato);
+                printf("\nValor modificado correctamente\n");
+                encontrado = 1;
             }
-            primero=primero->Siguiente;
+            aux = aux -> Siguiente;
         }
-    }
-    return encontrado;
-}
-bool edit_elemento_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA EDITAR ELEMENTO DE LA COLA
-    bool editado=false;
-    Nodo *primero=reservar_memoria;
-    primero=inicio;
-    if(vacia_FIFO(inicio)!=true){
-        while (primero!=fin){
-        if(primero->dato==num){
-            quit_FIFO(inicio,fin,num);
-            editado=true;
-            }
-            primero=primero->Siguiente;
+        if(encontrado == 0){
+            printf("\nEl Dato no ha sido encontrado\n");
         }
+    }else{
+        printf("\nCola Vacia\n");
     }
-    return editado;
 }
-
 
 void iniciar_CIRC(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
     Nodo * inicio = NULL;
@@ -920,15 +936,15 @@ void iniciar_CIRC(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
 
 }
 void ins_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA INSERTAR ELEMENTOS A LA COLA
-    Nodo *nuevo_nodo = reservar_memoria;
-    nuevo_nodo -> dato = num;
-    nuevo_nodo -> Siguiente = NULL;
+    Nodo *nuevo_Nodo = reservar_memoria;
+    nuevo_Nodo -> dato = num;
+    nuevo_Nodo -> Siguiente = NULL;
     if(vacia_CIRC(inicio)){
-        inicio = nuevo_nodo;
+        inicio = nuevo_Nodo;
     }else{
-        fin -> Siguiente = nuevo_nodo;
+        fin -> Siguiente = nuevo_Nodo;
     }
-    fin = nuevo_nodo;
+    fin = nuevo_Nodo;
 }
 void most_CIRC(Nodo *inicio){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
     while(vacia_LIFO(inicio)!=true){
@@ -956,21 +972,6 @@ void elim_CIRC(){//FUNCION PARA VACIAR LA COLA EN NULL
     Nodo * inicio = NULL;
     Nodo * fin = NULL;
 }
-bool elim_elemento_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA COLA
-    bool eliminado=false;
-    Nodo *primero=reservar_memoria;
-    primero=inicio;
-    if(vacia_FIFO(inicio)!=true){
-        while (primero!=fin){
-        if(primero->dato==num){
-            quit_FIFO(inicio,fin,num);
-            eliminado=true;
-            }
-            primero=primero->Siguiente;
-        }
-    }
-    return eliminado;
-}
 bool buscar_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA COLA
     bool encontrado=false;
     Nodo *primero=reservar_memoria;
@@ -986,19 +987,3 @@ bool buscar_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA
     }
     return encontrado;
 }
-bool edit_elemento_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA EDITAR ELEMENTO DE LA COLA
-    bool editado=false;
-    Nodo *primero=reservar_memoria;
-    primero=inicio;
-    if(vacia_FIFO(inicio)!=true){
-        while (primero!=fin){
-        if(primero->dato==num){
-            quit_FIFO(inicio,fin,num);
-            editado=true;
-            }
-            primero=primero->Siguiente;
-        }
-    }
-    return editado;
-}
-
