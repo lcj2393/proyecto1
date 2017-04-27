@@ -97,7 +97,7 @@ int main(){
                     break;
                 case 3:
                     printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
-                    printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
+                    printf("\n 2. MOSTRAR EL fin ELEMENTO ");
                     printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
                     printf("\n Ingrese una opcion: ");
                     scanf("%d", &opc_sm);
@@ -108,7 +108,7 @@ int main(){
                         while(pila!=NULL){
                                 n=pila->dato;
                             if(pila->Siguiente==NULL){
-                                printf("\n El ultimo elemento es %d \n",n);
+                                printf("\n El fin elemento es %d \n",n);
                                 pila=pila->Siguiente;
                             }else{pila=pila->Siguiente;}
                         }
@@ -214,7 +214,7 @@ int main(){
                         break;
                 case 3:
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
-                        printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
+                        printf("\n 2. MOSTRAR EL fin ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
                         printf("\n Ingrese una opcion: ");
                         scanf("%d", &opc_sm);
@@ -225,7 +225,7 @@ int main(){
                             while(inicio!=NULL){
                                     n=inicio->dato;
                                 if(inicio->Siguiente==NULL){
-                                    printf("\n El ultimo elemento es %d \n",n);
+                                    printf("\n El fin elemento es %d \n",n);
                                     inicio=inicio->Siguiente;
                                 }else{inicio=inicio->Siguiente;}
                             }
@@ -393,7 +393,7 @@ int main(){
                         break;
                     case 3:
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
-                        printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
+                        printf("\n 2. MOSTRAR EL fin ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
                         printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
@@ -478,7 +478,7 @@ int main(){
                         break;
                     case 3:
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
-                        printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
+                        printf("\n 2. MOSTRAR EL fin ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
                         printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
@@ -564,7 +564,7 @@ int main(){
                         break;
                     case 3:
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
-                        printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
+                        printf("\n 2. MOSTRAR EL fin ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
                         printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
@@ -650,7 +650,7 @@ int main(){
                         break;
                     case 3:
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
-                        printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
+                        printf("\n 2. MOSTRAR EL fin ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
                         printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
@@ -986,4 +986,112 @@ bool buscar_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA
         }
     }
     return encontrado;
+}
+
+void ins_LISTA(){
+    Nodo* nuevo = reservar_memoria;
+    printf("\n\nDigite Dato a Ingresar en la Lista: ");
+    scanf("%d", &nuevo->dato);
+    if(inicio == NULL){
+        inicio = nuevo;
+        inicio -> Siguiente = NULL;
+        fin = nuevo;
+    }else{
+        fin -> Siguiente = nuevo;
+        nuevo -> Siguiente = NULL;
+        fin = nuevo;
+    }
+    printf("\nIngreso Exitoso\n");
+}
+
+void most_Lista(){
+    Nodo* aux = reservar_memoria;
+    aux = inicio;
+    if(inicio != NULL){
+        while(aux != NULL){
+            printf("\n     %d", aux -> dato);
+            aux = aux -> Siguiente;
+        }
+    }else{
+        printf("\n\nLista Vacia");
+    }
+}
+
+void busc_LISTA(){
+    Nodo* aux = reservar_memoria;
+    aux = inicio;
+    int nodo_consultado = 0, encontrado = 0;
+    printf("\nDigite Dato a Consultar: ");
+    scanf("%d", &nodo_consultado);
+    if(inicio != NULL){
+        while(aux != NULL){
+            if(aux->dato == nodo_consultado){
+                printf("\nEl Valor ( %d ) - Se encuentra en la Lista\n", nodo_consultado);
+                encontrado = 1;
+            }
+            aux = aux -> Siguiente;
+        }
+        if(encontrado == 0){
+            printf("\nEl Valor nos e encuentra en la lista\n");
+        }
+    }else{
+        printf("\nLA Lista Vacia!!\n");
+    }
+}
+
+void edit_LISTA(){
+    Nodo* aux = reservar_memoria;
+    aux = inicio;
+    int nodo_consultado = 0, encontrado = 0;
+    printf("\nDigite dato a buscar en la lista para ser modificado: ");
+    scanf("%d", &nodo_consultado);
+    if(inicio != NULL){
+        while(aux != NULL){
+            if(aux->dato == nodo_consultado){
+                printf("\nDato Encontrado ( %d )\n", nodo_consultado);
+                printf("\nDigite nuevo Dato: ");
+                scanf("%d", &aux->dato);
+                printf("\nModificado Exitosamente\n");
+                encontrado = 1;
+            }
+            aux = aux -> Siguiente;
+        }
+        if(encontrado == 0){
+            printf("\nEl dato no se encuentra en la lista\n");
+        }
+    }else{
+        printf("\nLista Vacia\n");
+    }
+}
+
+void elim_elemento_LISTA(){
+    Nodo* aux = reservar_memoria;
+    aux = inicio;
+    Nodo* anterior = reservar_memoria;
+    anterior = NULL;
+    int nodo_consultado = 0, encontrado = 0;
+    printf("\nIngrese dato a buscar para eliminar: ");
+    scanf("%d", &nodo_consultado);
+    if(inicio != NULL){
+        while(aux != NULL && encontrado != 1){
+            if(aux->dato == nodo_consultado){
+                if(aux == inicio){
+                    inicio = inicio -> Siguiente;
+                }else{
+                    anterior -> Siguiente = aux -> Siguiente;
+                }
+                printf("\nSe ha encontrado el dato\n");
+                encontrado = 1;
+            }
+            anterior = aux;
+            aux = aux -> Siguiente;
+        }
+        if(encontrado == 0){
+            printf("\nEl Dato no se encontra\n");
+        }else{
+            free(anterior);
+        }
+    }else{
+        printf("\nLista Vacia!!\n");
+    }
 }
