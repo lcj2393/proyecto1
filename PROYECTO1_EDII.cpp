@@ -14,7 +14,7 @@ struct Nodo{
 
 void iniciar_LIFO();//FUNCION PAR AINICIALIZAR LA PILA EN NULL
 void ins_LIFO(Nodo *&, int);//FUNCION PARA INSERTAR ELEMENTOS EN LISTA LIFO
-void most_LIFO(Nodo *);//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
+void most_LIFO(Nodo *&);//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
 void buscar_LIFO(Nodo *, int);//FUNCION PARA BUSCAR EN LA PILA
 void quit_LIFO(Nodo *&, int &);//FUNCION PARA LIMPIAR PILA
 bool vacia_LIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA VACIA
@@ -46,7 +46,7 @@ int main(){
     Nodo * fin = NULL;
 
     char opc_mp;
-    int n,opc_sm,dbusc, tam;
+    int n,opc_sm,dbusc, val;
     bool vald=false;
     int nuevo_dato;
     do{
@@ -341,15 +341,83 @@ int main(){
 
                         switch(opc_sm){
                         case 1:
-
+                            printf("\n\t\t INSERTAR VALOR AL INICIO\n");
+                            printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
+                            while(n!=0){
+                                scanf("%d",&n);
+                                if(inicio==NULL && fin==NULL){
+                                    ins_CIRC(inicio,fin,n);
+                                    inicio=inicio->Siguiente;
+                                    printf("\n\nValor ingresado correctamente!")
+                                }else{
+                                    printf("\No es posible agregar valor, el principio no esta vacio!!\n\n");
+                                }
+                            }
                             break;
                         case 2:
+                            printf("\n\t\t INSERTAR VALOR AL FINAL\n");
+                            printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
+                            while(n!=0){
+                                scanf("%d",&n);
+                                if(inicio->Siguiente == fin){
+                                    ins_CIRC(inicio,fin,n);
+                                    inicio=inicio->Siguiente;
+                                    printf("\n\nValor ingresado correctamente!")
+                                }else{
+                                    printf("\No es posible agregar valor, el principio no esta vacio!!\n\n");
+                                }
+                            }
                             break;
                         case 3:
+                            printf("\n\t\t INSERTAR VALOR DESPUES DE UN NODO\n");
+                            printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
+                            while(n!=0){
+                                while(inicio!=NULL){
+                                    scanf("%d",&n);
+                                    if(inicio->Siguiente==NULL ){
+                                        ins_CIRC(inicio,fin,n);
+                                        inicio=inicio->Siguiente;
+                                        printf("\n\nValor ingresado correctamente!")
+                                    }else{
+                                        printf("\No es posible agregar valor, vuelva a intentar!!\n\n");
+                                        inicio=inicio->Siguiente;
+                                    }
+                                }
+                            }
                             break;
                         case 4:
+                            printf("\n\t\t INSERTAR VALOR ANTES DE UN NODO\n");
+                            printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
+                            while(n!=0){
+                                while(inicio!=NULL){
+                                    if(inicio->dato==NULL ){
+                                        scanf("%d",&n);
+                                        inicio->dato=n;
+                                        inicio=inicio->Siguiente;
+                                        printf("\n\nValor ingresado correctamente!")
+                                    }else{
+                                        printf("\No es posible agregar valor, vuelva a intentar!!\n\n");
+                                        inicio=inicio->Siguiente;
+                                    }
+                                }
+                            }
                             break;
                         case 5:
+                            printf("\n\t\t INSERTAR VALOR ASCENDENTEMENTE\n");
+                            printf("\nDigite un valor numerico (Digite <0> para detener el ingreso: \n");
+                            while(n!=0){
+                                while(inicio!=NULL){
+                                    scanf("%d",&n);
+                                    if(inicio->Siguiente==NULL ){
+                                        ins_CIRC(inicio,fin,n);
+                                        inicio=inicio->Siguiente;
+                                        printf("\n\nValor ingresado correctamente!")
+                                    }else{
+                                        printf("\No es posible agregar valor, vuelva a intentar!!\n\n");
+                                        inicio=inicio->Siguiente;
+                                    }
+                                }
+                            }
                             break;
                         case 6:
                             break;
@@ -717,10 +785,12 @@ void ins_LIFO(Nodo *&pila, int n){//FUNCION INSERTAR ELEMENTOS EN PILA (OK)
     nuevo_nodo->Siguiente=pila;
     pila= nuevo_nodo;
 }
-void most_LIFO(Nodo *pila){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
-    while(vacia_LIFO(pila)!=true){
-        printf("<%d>",pila->dato);
-        pila=pila->Siguiente;
+void most_LIFO(Nodo *&pila){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
+    Nodo *aux1=NULL;
+    aux1=pila;
+    while(vacia_LIFO(aux1)!=true){
+        printf(" <%d> ",aux1->dato);
+        aux1=aux1->Siguiente;
     }
 }
 void quit_LIFO(Nodo *&pila, int &n){//FUNCION PARA LIMPIAR PILA
@@ -771,9 +841,11 @@ void ins_FIFO(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA INSERTAR ELEMEN
     fin = nuevo_nodo;
 }
 void most_FIFO(Nodo *inicio, Nodo *fin){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
-    while(vacia_LIFO(fin)!=false){
-        printf("\n-<%d>-, ",inicio->dato);
-        inicio=inicio->Siguiente;
+    Nodo *aux2=NULL;
+    aux2=inicio;
+    while(aux2!=NULL){
+        printf("\n-<%d>-, ",aux2->dato);
+        aux2=aux2->Siguiente;
     }
 }
 void quit_FIFO(Nodo *&inicio, Nodo *&fin, int &num){//FUNCION PARA LIMPIAR COLA
@@ -862,6 +934,7 @@ void most_CIRC(Nodo *inicio){//FUNCION PARA MOSTRAR ELEMENTOS DE LA COLA
     while(vacia_LIFO(inicio)!=true){
         printf("<%d>, ",inicio->dato);
         inicio=inicio->Siguiente;
+
     }
 }
 void quit_CIRC(Nodo *&inicio, Nodo *&fin, int &num){//FUNCION PARA LIMPIAR COLA
