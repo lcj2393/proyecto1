@@ -10,15 +10,13 @@ struct Nodo{
     Nodo *Siguiente;
 };
 
-    Nodo * pila = NULL;
-    Nodo * inicio = NULL;
-    Nodo * fin = NULL;
-
-//void menu();//FUNION PARA EL MENU COMPLETO Y SUBMENU
+    Nodo * pila;
+    Nodo * inicio;
+    Nodo * fin;
 
 void iniciar_LIFO();//FUNCION PAR AINICIALIZAR LA PILA EN NULL
 void ins_LIFO(Nodo *&, int);//FUNCION PARA INSERTAR ELEMENTOS EN LISTA LIFO
-void most_LIFO(Nodo *&);//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
+void most_LIFO();//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
 void buscar_LIFO(Nodo *, int);//FUNCION PARA BUSCAR EN LA PILA
 void quit_LIFO(Nodo *&, int &);//FUNCION PARA LIMPIAR PILA
 bool vacia_LIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA VACIA
@@ -91,6 +89,19 @@ int main(){
                         scanf("%d",&n);
                         if(n!=0){
                         ins_LIFO(pila,n);
+                        }else{
+                            if(n==0){
+                                printf("\nDesea ingresar este elemento a la Pila? |1|-SI o |2|-NO ");
+                                scanf("%d",&val);
+                                if(val==1){
+                                    ins_LIFO(pila,n);
+                                    n=1;
+                                    printf("\nContinue Registrando valores!!\n\n");
+                                }else{
+                                    n=0;
+                                }
+                            }
+
                         }
                     }
                     printf("\n\n");
@@ -116,7 +127,7 @@ int main(){
                     case 3:
                         printf("\nMOSTRAR TODOS LOS ELEMENTOS \n\n");
                         printf("\nLa lista LIFO contiene los Siguientes elementos: \n\n");
-                        most_LIFO(pila);
+                        most_LIFO();
                         printf("\n\n<<%d>>",n);
                         break;
                     default: printf("\n Ingreso una opcion invalida!!! \n\n");
@@ -208,7 +219,20 @@ int main(){
                             scanf("%d",&n);
                             if(n!=0){
                             ins_FIFO(inicio,fin,n);
+                            }else{
+                            if(n==0){
+                                printf("\nDesea ingresar este elemento a la Pila? |1|-SI o |2|-NO ");
+                                scanf("%d",&val);
+                                if(val==1){
+                                    ins_FIFO(inicio,fin,n);
+                                    n=1;
+                                    printf("\nContinue Registrando valores!!\n\n");
+                                }else{
+                                    n=0;
+                                }
                             }
+
+                        }
                         }
                         printf("\nDatos ingresados correctamente!!\n\n");
                         break;
@@ -254,9 +278,9 @@ int main(){
                     case 8:
                         printf("\nLIFO VACIA\n\n");
                         if(vacia_LIFO(pila)){
-                            printf("\nLa lista LIFO esta vacia!\n\n");
+                            printf("\nLa lista FIFO esta vacia!\n\n");
                         }else{
-                            printf("\nLa lista LIFO  no esta vacia! ((%d))\n\n",pila->dato);
+                            printf("\nLa lista FIFO  no esta vacia! ((%d))\n\n",pila->dato);
                         }
                         break;
                     case 9:printf("\nELIMINAR FIFO\n\n");
@@ -400,6 +424,7 @@ int main(){
                         scanf("%d", &opc_sm);
                         switch(opc_sm){
                         case 1:
+                            printf("\n\nEl primer elemento es: <%d>",inicio->dato);
                             break;
                         case 2:
                             break;
@@ -742,13 +767,12 @@ void iniciar_LIFO(){//FUNCION PAR AINICIALIZAR LA PILA EN NULL (OK)
     Nodo * pila = NULL;
 }
 void ins_LIFO(Nodo *&pila, int n){//FUNCION INSERTAR ELEMENTOS EN PILA (OK)
-
     Nodo *nuevo_Nodo = reservar_memoria;
     nuevo_Nodo->dato=n;
     nuevo_Nodo->Siguiente=pila;
     pila= nuevo_Nodo;
 }
-void most_LIFO(Nodo *&pila){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
+void most_LIFO(){//FUNCION PARA MOSTRAR ELEMENTOS DE LA PILA
     Nodo * aux = reservar_memoria;
     aux = pila;
     if(pila != NULL){
@@ -1017,7 +1041,7 @@ void most_Lista(){
     }
 }
 
-void busc_LISTA(){
+void busc_LISTA(){//
     Nodo* aux = reservar_memoria;
     aux = inicio;
     int nodo_consultado = 0, encontrado = 0;
@@ -1039,7 +1063,7 @@ void busc_LISTA(){
     }
 }
 
-void edit_LISTA(){
+void edit_LISTA(){//FUNCION PARA EDITAR LOS ELEMENTOS DE UNA LISTA
     Nodo* aux = reservar_memoria;
     aux = inicio;
     int nodo_consultado = 0, encontrado = 0;
@@ -1064,7 +1088,7 @@ void edit_LISTA(){
     }
 }
 
-void elim_elemento_LISTA(){
+void elim_elemento_LISTA(){//FUNION PARA ELIMINAR ELEMENTOS DE UNA LISTA
     Nodo* aux = reservar_memoria;
     aux = inicio;
     Nodo* anterior = reservar_memoria;
