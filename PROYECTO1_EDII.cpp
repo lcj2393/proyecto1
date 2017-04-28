@@ -101,7 +101,6 @@ int main(){
                                     n=0;
                                 }
                             }
-
                         }
                     }
                     printf("\n\n");
@@ -766,6 +765,7 @@ int main(){
 void iniciar_LIFO(){//FUNCION PAR AINICIALIZAR LA PILA EN NULL (OK)
     Nodo * pila = NULL;
 }
+//FUNCIONES DE PILA
 void ins_LIFO(Nodo *&pila, int n){//FUNCION INSERTAR ELEMENTOS EN PILA (OK)
     Nodo *nuevo_Nodo = reservar_memoria;
     nuevo_Nodo->dato=n;
@@ -842,7 +842,7 @@ void mod_LIFO(){
     }
 }
 
-
+//FUNCIONES DE COLAS
 void iniciar_FIFO(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
     Nodo * inicio = NULL;
     Nodo * fin = NULL;
@@ -954,6 +954,7 @@ void edit_elemento_FIFO(){//FUNCION PARA EDITAR ELEMENTO DE LA COLA
     }
 }
 
+//FUNCIONES DE LISTAS CIRCULARES
 void iniciar_CIRC(){//FUNCION PARA INICIALIZAR LA COLA EN NULL
     Nodo * inicio = NULL;
     Nodo * fin = NULL;
@@ -1012,7 +1013,8 @@ bool buscar_CIRC(Nodo *&inicio, Nodo *&fin, int num){//FUNCION PARA BUSCAR EN LA
     return encontrado;
 }
 
-void ins_LISTA(){
+//FUNCIONES DE LISTA SIMPLE
+void ins_LISTA(){//FUNION PARA INSERTAR ELEMENTOS EN LA LISTA
     Nodo* nuevo = reservar_memoria;
     printf("\n\nDigite Dato a Ingresar en la Lista: ");
     scanf("%d", &nuevo->dato);
@@ -1027,8 +1029,7 @@ void ins_LISTA(){
     }
     printf("\nIngreso Exitoso\n");
 }
-
-void most_Lista(){
+void most_Lista(){//FUNCION PARA MOSTRAR LOS ELEMENTOS DE LA LISTA
     Nodo* aux = reservar_memoria;
     aux = inicio;
     if(inicio != NULL){
@@ -1040,8 +1041,7 @@ void most_Lista(){
         printf("\n\nLista Vacia");
     }
 }
-
-void busc_LISTA(){//
+void busc_LISTA(){//FUNCION PARA BUSCAR UN ELEMENTO EN LA LISTA
     Nodo* aux = reservar_memoria;
     aux = inicio;
     int nodo_consultado = 0, encontrado = 0;
@@ -1062,7 +1062,6 @@ void busc_LISTA(){//
         printf("\nLA Lista Vacia!!\n");
     }
 }
-
 void edit_LISTA(){//FUNCION PARA EDITAR LOS ELEMENTOS DE UNA LISTA
     Nodo* aux = reservar_memoria;
     aux = inicio;
