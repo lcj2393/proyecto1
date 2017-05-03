@@ -25,6 +25,12 @@ bool vacia_FIFO(Nodo *&);//FUNCION PARA VALIDAR SI LA PILA ESTA COLA
 void elim_FIFO();//FUNCION PARA VACIAR LA COLA EN NULL
 void edit_elemento_FIFO();//FUNCION PARA EDITAR ELEMENTO DE LA COLA
 
+void iniciar_LISTA();//FUNCION PARA INICIALIZAR LA LSITA
+void most_Lista();//FUNCION PARA MOSTRAR LOS ELEMENTOS DE LA LISTA
+void edit_LISTA();//FUNCION PARA EDITAR LOS ELEMENTOS DE UNA LISTA
+void elim_elemento_LISTA();//FUNION PARA ELIMINAR ELEMENTOS DE UNA LISTA
+void buscar_LISTA();//FUNCION PARA BUSCAR ELEMENOS EN LA LISTA
+
     Nodo *pila;
     Nodo *inicio;
     Nodo *fin;
@@ -257,8 +263,8 @@ int main(){
 
                         break;
                     case 8:
-                        printf("\nLIFO VACIA\n\n");
-                        if(vacia_LIFO(pila)){
+                        printf("\nFIFO VACIA\n\n");
+                        if(vacia_LIFO(inicio)){
                             printf("\nLa lista FIFO esta vacia!\n\n");
                         }else{
                             printf("\nLa lista FIFO  no esta vacia! ((%d))\n\n",pila->dato);
@@ -292,11 +298,15 @@ int main(){
                 scanf("%d", &opc_sm);
                 switch(opc_sm){
                     case 1:
+                        iniciar_LISTA();
+                        printf("\t\t\nINICIALIZAR LISTA\n\n");
+                        printf("\nLista Inicializada Correctamente!\n");
                         break;
                     case 2:
+                        printf("\t\t\nINSERTAR VALORES\n\n");
                         printf("\n 1. AL INICIO ");
                         printf("\n 2. AL FINAL ");
-                        printf("\n 3. DESPUES DE UN Nodo ");
+                        printf("\n 3. DESPUES DE UN NODO ");
                         printf("\n 4. ANTES DE UN Nodo ");
                         printf("\n 5. EN MEDIO DE DOS NodoS ");
                         printf("\n 6. EN FORMA ASCENDENTE ");
@@ -306,12 +316,43 @@ int main(){
 
                         switch(opc_sm){
                         case 1:
+                            printf("\t\t\nAL INICIO\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            inicio->dato=n;
+                            printf("\nDato insertado correctamente!\n");
                             break;
                         case 2:
+                            printf("\t\t\nAL FINAL\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            fin->dato=n;
+                            inicio=fin;
+                            fin->Siguiente=NULL;
+                            printf("\nDato insertado correctamente!\n");
                             break;
                         case 3:
+                            printf("\t\t\nDESPUES DE UN NODO\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            while(inicio!=NULL){
+                                if(inicio->Siguiente==NULL){
+                                    inicio=inicio->Siguiente;
+                                    inicio->dato=n;
+                                }
+                            }
+                            inicio=fin;
+                            fin->Siguiente=NULL;
+                            printf("\nDato insertado correctamente!\n");
                             break;
                         case 4:
+                            printf("\t\t\nEN MEDIO DE 2 NODOS\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            fin->dato=n;
+                            inicio=fin;
+                            fin->Siguiente=NULL;
+                            printf("\nDato insertado correctamente!\n");
                             break;
                         case 5:
                             break;
@@ -342,16 +383,33 @@ int main(){
                         }
                         break;
                     case 4:
+                        printf("\t\t\nBUSCAR ELEMENTO EN LA LISTA\n");
+                        buscar_LISTA();
                         break;
                     case 5:
+                        printf("\t\t\nELIMINAR ELEMENTO DE LA LISTA\n");
+                        elim_elemento_LISTA();
                         break;
                     case 6:
+                        printf("\t\t\EDITAR ELEMENTO DE LA LISTA\n");
+                        edit_LISTA();
                         break;
                     case 7:
+                        printf("\t\t\nVACIAR ELEMENTOS DE LA LISTA\n");
+                        iniciar_LISTA();
                         break;
                     case 8:
+                        printf("\t\t\nLISTA VACIA\n");
+                        if(inicio==NULL || fin==NULL){
+                            printf("\nLa Lista esta Vacia!!\n");
+                        }else{
+                            printf("\nLa Lista NO esta Vacia!!\n");
+                        }
                         break;
                     case 9:
+                        printf("\t\\nELIMINAR LISTA\n");
+                        iniciar_LISTA();
+                        printf("\nLa Listra ha sido eleiminada correctamente!\n");
                         break;
                     case 0:
                         system("cls");
@@ -555,20 +613,8 @@ void edit_elemento_FIFO(){//FUNCION PARA EDITAR ELEMENTO DE LA COLA
 }
 
 //FUNCIONES DE LISTA SIMPLE
-void ins_LISTA(){//FUNION PARA INSERTAR ELEMENTOS EN LA LISTA
-    Nodo* nuevo = reservar_memoria;
-    printf("\n\nDigite Dato a Ingresar en la Lista: ");
-    scanf("%d", &nuevo->dato);
-    if(inicio == NULL){
-        inicio = nuevo;
-        inicio -> Siguiente = NULL;
-        fin = nuevo;
-    }else{
-        fin -> Siguiente = nuevo;
-        nuevo -> Siguiente = NULL;
-        fin = nuevo;
-    }
-    printf("\nIngreso Exitoso\n");
+void iniciar_LISTA(){
+    Nodo *inicio=NULL, *fin=NULL;
 }
 void most_Lista(){//FUNCION PARA MOSTRAR LOS ELEMENTOS DE LA LISTA
     Nodo* aux = reservar_memoria;
@@ -658,3 +704,30 @@ void elim_elemento_LISTA(){//FUNION PARA ELIMINAR ELEMENTOS DE UNA LISTA
         printf("\nLista Vacia!!\n");
     }
 }
+void buscar_LISTA(){//FUNCION PARA BUSCAR ELEMENOS EN LA LISTA
+  int b, control;
+  control=0;
+  printf("\nIngrese numero a buscar: \n");
+  scanf("%d",&b);
+
+while (inicio!=NULL && control==0){
+    if(inicio->dato==b){
+        control=1;
+    }
+        inicio=inicio->Siguiente;
+}
+if(control==1){
+   printf("\nEl numero buscado si existe en la Lista! \n");
+   } else{
+        printf("\nEl numero buscado no existe en la Lista!\n");
+    }
+}
+int tam_LISTA(){//FUNCION PARA SABER EL TAMAÑO DE LA LISTA
+int cant = 0;
+while(inicio!=NULL){
+    cant++;
+    inicio = inicio->Siguiente;
+    }
+  return cant;
+}
+
