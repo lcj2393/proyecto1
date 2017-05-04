@@ -34,7 +34,12 @@ void buscar_LISTA();//FUNCION PARA BUSCAR ELEMENOS EN LA LISTA
 void insert_men_may_LISTA();//FUNCION PARA ORDENAR DATOS DE MENOR A MAYOR
 void insert_may_men_LISTA();//FUNCION PARA ORDENAR LISTA DE MAYOR A MENOR
 
-
+void ins_LD();// INGRESAR ELEMENTOS A LA LISTA DOBLEMENTE ENLAZADA
+void most_UP_LD();// MOTRAR ELEMENTOS DE FORMA ASCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
+void most_DW_LD();// IMPRIMIR ELEMENTOS DE FORMA DESCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
+void busc_LD();//BUSCAR ELEMENTOS EN LA LISTA DOBLEMENTE ENLAZADA
+void edit_LD();//EDITAR ELEMENTOS EN LA LISTA DOBLEMENTE ENLAZADA
+void elim_LD();//ELIMINAR ELEMENTOS DE LA LISTA DOBLEMENTE ENLAZADA
 
     Nodo *pila;
     Nodo *inicio;
@@ -51,6 +56,7 @@ int main(){
         printf("\n a. LISTAS LIFO");
         printf("\n b. LISTAS FIFO ");
         printf("\n c. LISTA SIMPLEMENTE ENLAZADAS ");
+        printf("\n d. LISTA DOBLEMENTE ENLAZADAS ");
         printf("\n s. Salir \n");
         printf("\n Ingrese una opcion (En Minusculas): ");
         scanf("%s", &opc_mp);
@@ -373,7 +379,7 @@ int main(){
                         break;
                     case 3:
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
-                        printf("\n 2. MOSTRAR EL fin ELEMENTO ");
+                        printf("\n 2. MOSTRAR EL FIN ELEMENTO ");
                         printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
                         printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
                         printf("\n Ingrese una opcion: ");
@@ -432,6 +438,91 @@ int main(){
                         printf("\t\\nELIMINAR LISTA\n");
                         iniciar_LISTA();
                         printf("\nLa Listra ha sido eleiminada correctamente!\n");
+                        break;
+                    case 0:
+                        system("cls");
+                        break;
+                    default: printf("\n Ingreso una opcion invalida!!! \n\n");
+                        break;
+                }
+                break;
+            case 'd':
+                system("cls");
+                printf("\t\t\n MENU LISTAS CIRCULARES DOBLEMENTE ENLAZADAS \n\n");
+                printf("\n 1. CREAR LISTA");
+                printf("\n 2. INSERTAR ELEMENTOS ");
+                printf("\n 3. IMPRIMIR ELEMENTOS ");
+                printf("\n 4. BUSCAR ELEMENTOS ");
+                printf("\n 5. ELIMINAR ELEMENTOS ");
+                printf("\n 6. EDITAR ELEMENTOS ");
+                printf("\n 7. VACIAR ELEMENTOS ");
+                printf("\n 8. LISTA VACIA ");
+                printf("\n 9. ELIMINAR LISTA ");
+                printf("\n 0. VOLVER AL MENU PRINCIPAL \n");
+                printf("\n Ingrese una opcion: ");
+                scanf("%d", &opc_sm);
+                switch(opc_sm){
+                    case 1:
+                        break;
+                    case 2:
+                        printf("\n 1. AL INICIO ");
+                        printf("\n 2. AL FINAL ");
+                        printf("\n 3. DESPUES DE UN Nodo ");
+                        printf("\n 4. ANTES DE UN Nodo ");
+                        printf("\n 5. EN MEDIO DE DOS NodoS ");
+                        printf("\n 6. EN FORMA ASCENDENTE ");
+                        printf("\n 7. EN FORMA DESCENDENTE ");
+                        printf("\n Ingrese una opcion: ");
+                        scanf("%d", &opc_sm);
+
+                        switch(opc_sm){
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            break;
+                        case 7:
+                            break;
+                        default: printf("\n Ingreso una opcion invalida!!! \n\n");
+                            break;
+                        }
+
+                        break;
+                    case 3:
+                        printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
+                        printf("\n 2. MOSTRAR EL fin ELEMENTO ");
+                        printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
+                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
+                        printf("\n Ingrese una opcion: ");
+                        scanf("%d", &opc_sm);
+                        switch(opc_sm){
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        default: printf("\n Ingreso una opcion invalida!!! \n\n");
+                        }
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    case 9:
                         break;
                     case 0:
                         system("cls");
@@ -752,48 +843,164 @@ while(inicio!=NULL){
   return cant;
 }
 void insert_may_men_LISTA(){//FUNCION PARA ORDENAR LISTA DE MAYOR A MENOR
-     Nodo *actual , *next;
-     actual=reservar_memoria;
+     Nodo *aux2 , *next;
+     aux2=reservar_memoria;
      next=reservar_memoria;
      int t;
 
-     actual = inicio;
-     while(actual->Siguiente != NULL){
-          next = actual->Siguiente;
+     aux2 = inicio;
+     while(aux2->Siguiente != NULL){
+          next = aux2->Siguiente;
           while(next!=NULL){
-               if(actual->dato < next->dato){
+               if(aux2->dato < next->dato){
                     t = next->dato;
-                    next->dato = actual->dato;
-                    actual->dato = t;
+                    next->dato = aux2->dato;
+                    aux2->dato = t;
                     printf("<%d>",t);
                }
                next = next->Siguiente;
           }
-          actual = actual->Siguiente;
-          next = actual->Siguiente;
+          aux2 = aux2->Siguiente;
+          next = aux2->Siguiente;
      }
      printf("\n\n\tLista ordenada!!");
 }
 void insert_men_may_LISTA(){//FUNCION PARA ORDENAR DATOS DE MENOR A MAYOR
-     Nodo *actual , *next;
-     actual=reservar_memoria;
+     Nodo *aux2 , *next;
+     aux2=reservar_memoria;
      next=reservar_memoria;
      int t;
 
-     actual = inicio;
-     while(actual->Siguiente != NULL){
-          next = actual->Siguiente;
+     aux2 = inicio;
+     while(aux2->Siguiente != NULL){
+          next = aux2->Siguiente;
           while(next!=NULL){
-               if(actual->dato > next->dato){
+               if(aux2->dato > next->dato){
                     t = next->dato;
-                    next->dato = actual->dato;
-                    actual->dato = t;
+                    next->dato = aux2->dato;
+                    aux2->dato = t;
                     printf("<%d>",t);
                }
                next = next->Siguiente;
           }
-          actual = actual->Siguiente;
-          next = actual->Siguiente;
+          aux2 = aux2->Siguiente;
+          next = aux2->Siguiente;
      }
      printf("\n\n\tLista ordenada!!");
+}
+
+//FUNCIONES LISTAS DOBLEMENTE ENLAZADAS
+void ins_LD(){// INGRESAR ELEMENTOS A LA LISTA DOBLEMENTE ENLAZADA
+    Nodo* nuevo_nodo = reservar_memoria;
+    printf("\n  Digite Valor a insertar: "); scanf("%d", &nuevo_nodo->dato);
+
+    if(inicio == NULL){
+        inicio = nuevo_nodo;
+        inicio -> Siguiente = NULL;
+        inicio->Anterior = NULL;
+        fin = inicio;
+    }else{
+        fin -> Siguiente = nuevo_nodo;
+        nuevo_nodo -> Siguiente = NULL;
+        nuevo_nodo -> Anterior = fin;
+        fin = nuevo_nodo;
+    }
+    printf("\n Dato ingresado correctamente! \n\n");
+}
+void most_UP_LD(){// MOTRAR ELEMENTOS DE FORMA ASCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
+    Nodo *aux2 = reservar_memoria;
+    aux2 = inicio;
+    if(inicio != NULL){
+        while(aux2 != NULL){
+            printf("<%d>", aux2->dato);
+            aux2 = aux2->Siguiente; }
+    }else{ printf("\nLista Vacia!\n\n"); }
+}
+void most_DW_LD(){// IMPRIMIR ELEMENTOS DE FORMA DESCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
+    Nodo *aux2 = reservar_memoria;
+    aux2 = fin;
+    if(inicio != NULL){
+        while(aux2 != NULL){
+            printf("<%d>", aux2->dato);
+            aux2 = aux2->Anterior; }
+    }else{ printf("\nLista vacia!\n\n"); }
+}
+void busc_LD(){//BUSCAR ELEMENTOS EN LA LISTA DOBLEMENTE ENLAZADA
+    int buscar=0;
+    bool encontrado=false;
+    Nodo *aux2 = reservar_memoria;
+    aux2 = inicio;
+    printf("\n  Ingrese el numero que desea buscar: "); scanf("%d", &buscar);
+
+    if(inicio != NULL){
+        while(aux2 != NULL && encontrado != true){
+            if(aux2->dato == buscar){
+                printf("\n  El numero (%d) se encuentra en la lista! \n\n", buscar);
+                encontrado = true;
+            }
+            aux2 = aux2->Siguiente;
+        } if(encontrado == false){
+                printf("\nEl nodo se encuentra en la lista! \n\n"); }
+    }else{ printf("\nLista vacia!\n\n"); }
+}
+void edit_LD(){//EDITAR ELEMENTOS EN LA LISTA DOBLEMENTE ENLAZADA
+    int buscar=0;
+    bool encontrado=false;
+    Nodo *aux2 = reservar_memoria;
+    aux2 = inicio;
+
+    printf("\n  Ingrese el numero que desea buscar: "); scanf("%d", &buscar);
+    if(inicio != NULL){
+        while(aux2 != NULL){
+            if(aux2->dato == buscar){
+                printf("\n  El numero (%d) se encuentra en la lista", buscar);
+                printf("\n  Ingrese el nuevo numero: ");
+                scanf("%d", &aux2->dato);
+                printf("\n  El numero (%d) se modifico con exito! \n\n");
+                encontrado = true;
+            }
+            aux2 = aux2->Siguiente;
+        }
+        if(encontrado == false){
+            printf("\n  El numero (%d) no esta en la lista.", buscar); }
+    }else{ printf("\nLista vacia!\n\n"); }
+}
+void elim_LD(){//ELIMINAR ELEMENTOS DE LA LISTA DOBLEMENTE ENLAZADA
+    int buscar=0;
+    bool encontrado=false;
+    Nodo *aux2 = reservar_memoria;
+    aux2 = inicio;
+    Nodo* Backk = reservar_memoria;
+    Backk = NULL;
+
+    printf("\n  Ingrese el numero que desea buscar: ");
+    scanf("%d", &buscar);
+
+    if(inicio != NULL){
+        while(aux2 != NULL && encontrado != true){
+            if(aux2->dato == buscar){
+                if(aux2 == inicio){
+                    inicio = inicio -> Siguiente;
+                    inicio -> Anterior = NULL;
+                }else if(aux2 == fin){
+                    Backk->Siguiente = NULL;
+                    fin = Backk;
+                }else{
+                    Backk -> Siguiente = aux2 -> Siguiente;
+                    aux2 -> Siguiente -> Anterior = Backk;
+                }
+                printf("\nNodo Eliminado\n");
+                encontrado = true;
+            }
+            Backk = aux2;
+            aux2 = aux2 -> Siguiente;
+        }
+        if(encontrado == false){
+            printf("\nEl Nodo no se encuentra\n");
+        }else{
+            free(Backk);
+        }
+    }else{
+        printf("\nLista Vacia\n");
+    }
 }
