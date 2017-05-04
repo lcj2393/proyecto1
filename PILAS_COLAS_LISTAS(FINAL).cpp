@@ -34,9 +34,11 @@ void buscar_LISTA();//FUNCION PARA BUSCAR ELEMENOS EN LA LISTA
 void insert_men_may_LISTA();//FUNCION PARA ORDENAR DATOS DE MENOR A MAYOR
 void insert_may_men_LISTA();//FUNCION PARA ORDENAR LISTA DE MAYOR A MENOR
 
+void iniciar_LD();//FINCION PARA INCIALIZAR LA LISTA DOBLEMENTE ENLAZADA
 void ins_LD();// INGRESAR ELEMENTOS A LA LISTA DOBLEMENTE ENLAZADA
-void most_UP_LD();// MOTRAR ELEMENTOS DE FORMA ASCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
-void most_DW_LD();// IMPRIMIR ELEMENTOS DE FORMA DESCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
+void most_LD();//FUNCION PARA MOSTRAR LOS ELEMENTOS DE LA LISTA DOBLEMENTE ENLAZADA
+void most_IZQ_DER();// MOTRAR ELEMENTOS DE LA LISTA DOBLEMENTE ENLAZADA DE IZQUIERDA A DERECHA
+void most_DER_IZQ();// IMPRIMIR ELEMENTOS DE LA LISTA DOBLEMENTE ENLAZADA DE DERECHA A IZQUIERDA
 void busc_LD();//BUSCAR ELEMENTOS EN LA LISTA DOBLEMENTE ENLAZADA
 void edit_LD();//EDITAR ELEMENTOS EN LA LISTA DOBLEMENTE ENLAZADA
 void elim_LD();//ELIMINAR ELEMENTOS DE LA LISTA DOBLEMENTE ENLAZADA
@@ -397,7 +399,6 @@ int main(){
                             printf("\t\t\nEL ANTERIOR ELEMENTO A UN NODO DE LA LISTA\n");
                             printf("\n\nDigite Dato para imprimir el nodo anterior: \n");
                             scanf("%d",&num);
-
                             while(inicio!=NULL){
                                 if(fin->dato==num){
                                     fin=fin->Anterior;
@@ -446,9 +447,9 @@ int main(){
                         break;
                 }
                 break;
-            case 'd':
+                case 'd':
                 system("cls");
-                printf("\t\t\n MENU LISTAS CIRCULARES DOBLEMENTE ENLAZADAS \n\n");
+                printf("\t\t\n MENU LISTAS DOBLEMENTE ENLAZADAS \n\n");
                 printf("\n 1. CREAR LISTA");
                 printf("\n 2. INSERTAR ELEMENTOS ");
                 printf("\n 3. IMPRIMIR ELEMENTOS ");
@@ -463,13 +464,17 @@ int main(){
                 scanf("%d", &opc_sm);
                 switch(opc_sm){
                     case 1:
+                        printf("\t\t\n INICIALIZAR LISTA DOBLE \n\n");
+                        iniciar_LD();
+                        printf("\nLista inicializada correctamente!!\n");
                         break;
                     case 2:
+                        printf("\t\t\nINSERTAR VALORES\n\n");
                         printf("\n 1. AL INICIO ");
                         printf("\n 2. AL FINAL ");
-                        printf("\n 3. DESPUES DE UN Nodo ");
+                        printf("\n 3. DESPUES DE UN NODO ");
                         printf("\n 4. ANTES DE UN Nodo ");
-                        printf("\n 5. EN MEDIO DE DOS NodoS ");
+                        printf("\n 5. EN MEDIO DE DOS NODOS ");
                         printf("\n 6. EN FORMA ASCENDENTE ");
                         printf("\n 7. EN FORMA DESCENDENTE ");
                         printf("\n Ingrese una opcion: ");
@@ -477,52 +482,133 @@ int main(){
 
                         switch(opc_sm){
                         case 1:
+                            printf("\t\t\nAL INICIO\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            inicio->dato=n;
+                            printf("\nDato insertado correctamente!\n");
                             break;
                         case 2:
+                            printf("\t\t\nAL FINAL\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            fin->dato=n;
+                            inicio=fin;
+                            fin->Siguiente=NULL;
+                            printf("\nDato insertado correctamente!\n");
                             break;
                         case 3:
+                            printf("\t\t\nDESPUES DE UN NODO\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            while(inicio!=NULL){
+                                if(inicio->Siguiente==NULL){
+                                    inicio=inicio->Siguiente;
+                                    inicio->dato=n;
+                                }
+                            }
+                            inicio=fin;
+                            fin->Siguiente=NULL;
+                            printf("\nDato insertado correctamente!\n");
+                            break;
+                        case 4:
+                            printf("\t\t\nANTES DE UN NODO\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+
+                            printf("\nDato insertado correctamente!\n");
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            printf("\t\t\nORDENAR LISTA DE MANERA ASCENDENTE\n");
+                            insert_men_may_LISTA();
+                            break;
+                        case 7:
+                            printf("\t\t\nORDENAR LISTA DE MANERA DESCENDENTE\n");
+                            insert_may_men_LISTA();
+                            break;
+                        default: printf("\n Ingreso una opcion invalida!!! \n\n");
+                            break;
+                        }
+                        break;
+                    case 3:
+                        printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
+                        printf("\n 2. MOSTRAR EL ULTIMO ELEMENTO ");
+                        printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
+                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTO A UN Nodo DADO ");
+                        printf("\n 5. MOSTRAR EL SIGUEINTE ELEMENTO A UN Nodo DADO ");
+                        printf("\n 6. MOSTRAR EMENTOS DE IZQUIERDA A DERECHA ");
+                        printf("\n 7. MOSTRAR ELEMENTOS DE DERECHA A IZQUIERDA ");
+                        printf("\n Ingrese una opcion: ");
+                        scanf("%d", &opc_sm);
+                        switch(opc_sm){
+                        case 1:
+                            printf("\t\t\nAL INICIO\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            inicio->dato=n;
+                            printf("\nDato insertado correctamente!\n");
+                            break;
+                        case 2:
+                            printf("\t\t\nAL FINAL\n");
+                            printf("\nDigite Valor: \n");
+                            scanf("%d",&n);
+                            fin->dato=n;
+                            inicio=fin;
+                            fin->Siguiente=NULL;
+                            printf("\nDato insertado correctamente!\n");
+                            break;
+                        case 3:
+                            printf("\t\t\nATODOS LOS ELEMENTOS\n");
+                            most_LD();
                             break;
                         case 4:
                             break;
                         case 5:
                             break;
                         case 6:
+                            printf("\t\t\nMOSTRAR DE IZQUIERDA A DERECHA\n");
+                            most_IZQ_DER();
                             break;
                         case 7:
+                            printf("\t\t\nMOSTRAR DE DERECHA A IZQUIERDA\n");
+                            most_DER_IZQ();
                             break;
-                        default: printf("\n Ingreso una opcion invalida!!! \n\n");
-                            break;
-                        }
-
+                        default:
+                            printf("\n Ingreso una opcion invalida!!! \n\n");
                         break;
-                    case 3:
-                        printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
-                        printf("\n 2. MOSTRAR EL fin ELEMENTO ");
-                        printf("\n 3. MOSTRAR TODOS LOS ELEMENTOS ");
-                        printf("\n 4. MOSTRAR EL ANTERIOR ELEMENTOS A UN Nodo DADO ");
-                        printf("\n Ingrese una opcion: ");
-                        scanf("%d", &opc_sm);
-                        switch(opc_sm){
-                        case 1:
-                            break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        default: printf("\n Ingreso una opcion invalida!!! \n\n");
                         }
                         break;
                     case 4:
+                        printf("\t\t\nBUSCAR ELEMENTOS\n");
+                        busc_LD();
                         break;
                     case 5:
+                        printf("\t\t\nELIMINAR ELEMENTOS\n");
+                        elim_LD();
                         break;
                     case 6:
+                        printf("\t\t\EDITAR ELEMENTOS\n");
+                        edit_LD();
                         break;
                     case 7:
+                        printf("\t\t\nVACIAR ELEMENTOS\n");
+                        iniciar_LD();
+                        printf("\nLista Vaciada correctamente!!\n");
                         break;
                     case 8:
+                        printf("\t\t\nLISTA VACIA\n");
+                        if(inicio==NULL || fin==NULL){
+                            printf("\nLa Lista esta Vacia!!\n");
+                        }else{
+                            printf("\nLa Lista NO esta Vacia!!\n");
+                        }
                         break;
                     case 9:
+                        printf("\t\t\nVACIAR LISTA\n");
+                        iniciar_LD();
+                        printf("\nLista Vaciada correctamente!!\n");
                         break;
                     case 0:
                         system("cls");
@@ -890,6 +976,12 @@ void insert_men_may_LISTA(){//FUNCION PARA ORDENAR DATOS DE MENOR A MAYOR
 }
 
 //FUNCIONES LISTAS DOBLEMENTE ENLAZADAS
+void iniciar_LD(){//FINCION PARA INCIALIZAR LA LISTA DOBLEMENTE ENLAZADA
+    inicio->Siguiente=NULL;
+    inicio->Anterior=NULL;
+    fin->Siguiente=NULL;
+    fin->Anterior=NULL;
+}
 void ins_LD(){// INGRESAR ELEMENTOS A LA LISTA DOBLEMENTE ENLAZADA
     Nodo* nuevo_nodo = reservar_memoria;
     printf("\n  Digite Valor a insertar: "); scanf("%d", &nuevo_nodo->dato);
@@ -907,7 +999,19 @@ void ins_LD(){// INGRESAR ELEMENTOS A LA LISTA DOBLEMENTE ENLAZADA
     }
     printf("\n Dato ingresado correctamente! \n\n");
 }
-void most_UP_LD(){// MOTRAR ELEMENTOS DE FORMA ASCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
+void most_LD(){//FUNCION PARA MOSTRAR LOS ELEMENTOS DE LA LISTA DOBLEMENTE ENLAZADA
+    Nodo* aux2 = reservar_memoria;
+    aux2 = inicio;
+    if(inicio != NULL){
+        while(aux2 != NULL){
+            printf("\n     %d", aux2 -> dato);
+            aux2 = aux2 -> Siguiente;
+        }
+    }else{
+        printf("\n\nLista Vacia");
+    }
+}
+void most_IZQ_DER(){// MOTRAR ELEMENTOS DE FORMA ASCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
     Nodo *aux2 = reservar_memoria;
     aux2 = inicio;
     if(inicio != NULL){
@@ -916,7 +1020,7 @@ void most_UP_LD(){// MOTRAR ELEMENTOS DE FORMA ASCENDENTE EN LA LISTA DOBLEMENTE
             aux2 = aux2->Siguiente; }
     }else{ printf("\nLista Vacia!\n\n"); }
 }
-void most_DW_LD(){// IMPRIMIR ELEMENTOS DE FORMA DESCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
+void most_DER_IZQ(){// IMPRIMIR ELEMENTOS DE FORMA DESCENDENTE EN LA LISTA DOBLEMENTE ENLAZADA
     Nodo *aux2 = reservar_memoria;
     aux2 = fin;
     if(inicio != NULL){
