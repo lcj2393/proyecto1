@@ -346,7 +346,7 @@ int main(){
                             printf("\nDato insertado correctamente!\n");
                             break;
                         case 4:
-                            printf("\t\t\nEN MEDIO DE 2 NODOS\n");
+                            printf("\t\t\nANTES DE UN NODO\n");
                             printf("\nDigite Valor: \n");
                             scanf("%d",&n);
                             fin->dato=n;
@@ -709,17 +709,16 @@ void buscar_LISTA(){//FUNCION PARA BUSCAR ELEMENOS EN LA LISTA
   control=0;
   printf("\nIngrese numero a buscar: \n");
   scanf("%d",&b);
-
-while (inicio!=NULL && control==0){
-    if(inicio->dato==b){
-        control=1;
+    while (inicio!=NULL && control==0){
+        if(inicio->dato==b){
+            control=1;
+        }
+            inicio=inicio->Siguiente;
     }
-        inicio=inicio->Siguiente;
-}
-if(control==1){
-   printf("\nEl numero buscado si existe en la Lista! \n");
-   } else{
-        printf("\nEl numero buscado no existe en la Lista!\n");
+    if(control==1){
+       printf("\nEl numero buscado si existe en la Lista! \n");
+       } else{
+            printf("\nEl numero buscado no existe en la Lista!\n");
     }
 }
 int tam_LISTA(){//FUNCION PARA SABER EL TAMAÑO DE LA LISTA
