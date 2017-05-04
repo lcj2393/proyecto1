@@ -5,6 +5,7 @@
 struct Nodo{
     int dato;
     Nodo *Siguiente;
+    Nodo *Anterior;
 };
 
 void iniciar_LIFO();//FUNCION PAR AINICIALIZAR LA PILA EN NULL
@@ -30,6 +31,10 @@ void most_Lista();//FUNCION PARA MOSTRAR LOS ELEMENTOS DE LA LISTA
 void edit_LISTA();//FUNCION PARA EDITAR LOS ELEMENTOS DE UNA LISTA
 void elim_elemento_LISTA();//FUNION PARA ELIMINAR ELEMENTOS DE UNA LISTA
 void buscar_LISTA();//FUNCION PARA BUSCAR ELEMENOS EN LA LISTA
+void insert_men_may_LISTA();//FUNCION PARA ORDENAR DATOS DE MENOR A MAYOR
+void insert_may_men_LISTA();//FUNCION PARA ORDENAR LISTA DE MAYOR A MENOR
+
+
 
     Nodo *pila;
     Nodo *inicio;
@@ -37,7 +42,7 @@ void buscar_LISTA();//FUNCION PARA BUSCAR ELEMENOS EN LA LISTA
 
 int main(){
     char opc_mp;
-    int n,opc_sm,dbusc, val;
+    int n,num,opc_sm,dbusc, val;
     bool vald=false;
     int nuevo_dato;
     do{
@@ -308,7 +313,7 @@ int main(){
                         printf("\n 2. AL FINAL ");
                         printf("\n 3. DESPUES DE UN NODO ");
                         printf("\n 4. ANTES DE UN Nodo ");
-                        printf("\n 5. EN MEDIO DE DOS NodoS ");
+                        printf("\n 5. EN MEDIO DE DOS NODOS ");
                         printf("\n 6. EN FORMA ASCENDENTE ");
                         printf("\n 7. EN FORMA DESCENDENTE ");
                         printf("\n Ingrese una opcion: ");
@@ -349,21 +354,22 @@ int main(){
                             printf("\t\t\nANTES DE UN NODO\n");
                             printf("\nDigite Valor: \n");
                             scanf("%d",&n);
-                            fin->dato=n;
-                            inicio=fin;
-                            fin->Siguiente=NULL;
+
                             printf("\nDato insertado correctamente!\n");
                             break;
                         case 5:
                             break;
                         case 6:
+                            printf("\t\t\nORDENAR LISTA DE MANERA ASCENDENTE\n");
+                            insert_men_may_LISTA();
                             break;
                         case 7:
+                            printf("\t\t\nORDENAR LISTA DE MANERA DESCENDENTE\n");
+                            insert_may_men_LISTA();
                             break;
                         default: printf("\n Ingreso una opcion invalida!!! \n\n");
                             break;
                         }
-
                         break;
                     case 3:
                         printf("\n 1. MOSTRAR EL PRIMER ELEMENTO ");
@@ -374,10 +380,26 @@ int main(){
                         scanf("%d", &opc_sm);
                         switch(opc_sm){
                         case 1:
+                            printf("\t\t\nEL PRIMER ELEMENTO DE LA LISTA\n");
+                            printf("\nEl Primer Elemento es: %d ",inicio->dato);
                             break;
                         case 2:
                             break;
+                            printf("\t\t\nEL ULTIMO ELEMENTO DE LA LISTA\n");
+                            printf("\nEl Ultimo Elemento es: %d ",fin->dato);
                         case 3:
+                            printf("\t\t\nEL ANTERIOR ELEMENTO A UN NODO DE LA LISTA\n");
+                            printf("\n\nDigite Dato para imprimir el nodo anterior: \n");
+                            scanf("%d",&num);
+
+                            while(inicio!=NULL){
+                                if(fin->dato==num){
+                                    fin=fin->Anterior;
+                                    printf("\nEl dato anterior a %d es %d.",num,fin->dato);
+                                }else{
+                                    fin=fin->Anterior;
+                                }
+                            }
                             break;
                         default: printf("\n Ingreso una opcion invalida!!! \n\n");
                         }
@@ -729,4 +751,49 @@ while(inicio!=NULL){
     }
   return cant;
 }
+void insert_may_men_LISTA(){//FUNCION PARA ORDENAR LISTA DE MAYOR A MENOR
+     Nodo *actual , *next;
+     actual=reservar_memoria;
+     next=reservar_memoria;
+     int t;
 
+     actual = inicio;
+     while(actual->Siguiente != NULL){
+          next = actual->Siguiente;
+          while(next!=NULL){
+               if(actual->dato < next->dato){
+                    t = next->dato;
+                    next->dato = actual->dato;
+                    actual->dato = t;
+                    printf("<%d>",t);
+               }
+               next = next->Siguiente;
+          }
+          actual = actual->Siguiente;
+          next = actual->Siguiente;
+     }
+     printf("\n\n\tLista ordenada!!");
+}
+void insert_men_may_LISTA(){//FUNCION PARA ORDENAR DATOS DE MENOR A MAYOR
+     Nodo *actual , *next;
+     actual=reservar_memoria;
+     next=reservar_memoria;
+     int t;
+
+     actual = inicio;
+     while(actual->Siguiente != NULL){
+          next = actual->Siguiente;
+          while(next!=NULL){
+               if(actual->dato > next->dato){
+                    t = next->dato;
+                    next->dato = actual->dato;
+                    actual->dato = t;
+                    printf("<%d>",t);
+               }
+               next = next->Siguiente;
+          }
+          actual = actual->Siguiente;
+          next = actual->Siguiente;
+     }
+     printf("\n\n\tLista ordenada!!");
+}
